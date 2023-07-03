@@ -23,17 +23,10 @@ describe('api server', () => {
         request(api)
             .get("/jobs/getall")
             .expect(200, done)
-            
-    })
-
-    test("test route", () => {
-        request(api)
-            .get("/")
-            .expect(201)
-            .end(function(err, res) {
-                if (err) throw err;
-                console.log(res.body);
-          })
+            //.end(function(err, res) {
+            //    if (err) throw err;
+            //    console.log(res.body);
+          //})
             
     })
 
