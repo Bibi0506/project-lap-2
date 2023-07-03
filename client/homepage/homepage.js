@@ -41,7 +41,30 @@ function startTimer() {
 
 startTimer();
 
-// addEventListener("resize", (event) => {
-//   clearInterval(timer);
-//   startTimer();
-// });
+const dropdown = document.querySelector(".dropdown_menu");
+const icons = document.querySelectorAll(".icon");
+const icon = document.querySelector(".icon");
+const body = document.querySelector("body");
+
+icons.forEach((icon) => {
+  icon.addEventListener("click", (event) => {
+    icon.classList.toggle("open");
+    dropdown.classList.toggle("openDrop");
+  });
+});
+
+body.addEventListener("click", (e) => {
+  console.log(e.target);
+  if (
+    e.target.classList.contains("center") ||
+    e.target.classList.contains("referenceForNav")
+  ) {
+    null;
+  } else if (dropdown.classList.contains("openDrop")) {
+    dropdown.classList.remove("openDrop");
+    icon.classList.toggle("open");
+    console.log("wq");
+  } else {
+    console.log("naa");
+  }
+});
