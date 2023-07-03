@@ -1,6 +1,6 @@
+DROP TABLE IF EXISTS Applications;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Applications;
 
 CREATE TABLE Users(
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -23,7 +23,6 @@ CREATE TABLE jobs(
     endDate DATE NOT NULL,
     hours_needed INT NOT NULL,
     num_volunteers INT NOT NULL,
-    volunteers INT ARRAY,
     PRIMARY KEY (job_id),
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
