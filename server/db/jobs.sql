@@ -51,4 +51,5 @@ VALUES
 
 INSERT INTO jobs (organisation_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers)
 VALUES
-(1, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01 09:00:00', '2023-07-02', 2, 2);
+(1, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01 09:00:00', '2023-07-02', 2, 2),
+(1, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06 09:00:00', '2023-07-06', 2, 1);
