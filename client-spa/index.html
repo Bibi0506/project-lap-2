@@ -7,11 +7,21 @@
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
-    <nav class="nav">
-      <a href="/" class="nav__link" data-link>Dashboard</a>
-      <a href="/posts" class="nav__link" data-link>Posts</a>
-      <a href="/settings" class="nav__link" data-link>Settings</a>
-    </nav>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Unity</h1>
+        <p class="sublogo">Post.Volunteer.Connect</p>
+      </div>
+      <div class="nav-buttons">
+        <!-- <h1 class="nav-button" id="about-unity">About Unity</h1>
+          <h1 class="nav-button" id="post-job">Post a Job</h1>
+          <h1 class="nav-button">Volunteer</h1> -->
+        <a href="/" class="nav__link" data-link>Dashboard</a>
+        <a href="/posts" class="nav__link" data-link>Posts</a>
+        <a href="/settings" class="nav__link" data-link>Settings</a>
+      </div>
+    </div>
+    <nav class="nav"></nav>
     <div id="app"></div>
     <script type="module" src="/static/js/index.js"></script>
   </body>

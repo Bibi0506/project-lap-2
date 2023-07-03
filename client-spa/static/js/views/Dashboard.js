@@ -4,10 +4,8 @@ export default class extends AbstractView {
   constructor(params) {
     super(params);
     this.setTitle("Dashboard");
-  }
-
-  async getHtml() {
-    return `
+    this.data = [{ name: "Harry" }, { name: "Alex" }];
+    this.template = `
     <div id="homepage-container">
         <div id="homepage-left">
             <h1 class="homepage-title">The most skilled and trusted volunteers</h1>
@@ -27,6 +25,10 @@ export default class extends AbstractView {
         </div>
     </div> `;
   }
+
+  async getHtml() {
+    return this.template;
+  }
 }
 
-// result.held_items.map((d) => `<p>${d}</p>`).join("")
+//<h1>${this.data.map((d) => `<p>${d.name}</p>`).join("")}</h1>
