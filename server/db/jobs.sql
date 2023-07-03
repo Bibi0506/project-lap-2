@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Applications;
 
 CREATE TABLE Users(
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -27,6 +28,15 @@ CREATE TABLE jobs(
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
+CREATE TABLE Applications(
+    application_id INT GENERATED ALWAYS AS IDENTITY,
+    job_id  INT NOT NULL,
+    user_id INT NOT NULL,
+    PRIMARY KEY (application_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    FOREIGN KEY (user_id) REFERENCES Users(id)
+);
+
 INSERT INTO Users (name, is_organisation, email, password, phone_number, address)
 VALUES
 ('Oliver Thomas', false, 'ssdf@gmail.com', 'qwer', 12332, 'qweqwtg'),
@@ -39,3 +49,8 @@ INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate
 VALUES
 (5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01 09:00:00', '2023-07-02', 2, 2),
 (5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06 09:00:00', '2023-07-06', 2, 1);
+
+INSERT INTO Applications (job_id, user_id) VALUES
+(1, 1),
+(1, 2),
+(2, 3);
