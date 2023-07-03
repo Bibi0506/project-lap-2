@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+  }
+  .navbar {
+    background-color: #D9D9D9;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo h1{
+      position: relative;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0%;
+    margin-top: 0%;
+    left: 10%;
+  }
+  .logo .sublogo {
+      position: relative;
+    font-weight: lighter;
+    font-size: 1rem;
+    margin-bottom: 0%;
+    margin-top: 0%;
+    left: 10%;
+  }
+  .nav-buttons {
+      position: relative;
+    display: flex;
+    gap: 20px;
+    right: 1%;
+  }
+  .nav-button {
+    font-size: 1.3rem;
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .nav-button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    transform: translateY(-3px);
+    color: #0B3954;
+    text-decoration-color: #0B3954;
+  }
+
+  .job-post {
+    background-color: #0B3954;
+    color: white;
+    margin-left: 5%;
+    width:40%;
+    height: 575px;
+    margin-top: 5%;
+    padding: 10px;
+    display: flex;
+    border-radius: 10px;
+    font-family: Quicksand;
+
+  }
+
+  .job-form{
+    display: inline-flexbox;
+    padding: 10px 15px;
+    margin-left: 50%;
+    border-radius: 10px;
+    align-items: center;
+    
+    
+  }
+
+  #post-btn {
+    align-items: center;
+    border-radius: 10px;
+    width: 30%;
+    height: 30px;
+    margin-left:80%;
+    display: flex;
+  }
