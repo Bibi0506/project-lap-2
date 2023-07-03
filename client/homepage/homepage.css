@@ -171,6 +171,12 @@ body {
   }
 }
 
+@media (min-width: 767px) {
+  .dropdown_menu {
+    display: none;
+  }
+}
+
 @media (max-width: 550px) {
   .homepage-buttons {
     flex-direction: column;
@@ -312,4 +318,14 @@ body {
 .center.open span:nth-child(3) {
   transform: rotate(-45deg);
   top: 13px;
+}
+
+.logo h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo h1 a:visited {
+  text-decoration: none;
+  color: black;
 }

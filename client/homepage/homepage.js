@@ -54,17 +54,14 @@ icons.forEach((icon) => {
 });
 
 body.addEventListener("click", (e) => {
-  console.log(e.target);
   if (
     e.target.classList.contains("center") ||
-    e.target.classList.contains("referenceForNav")
+    e.target.classList.contains("referenceForNav") ||
+    e.target.classList.contains("dropdown_menu")
   ) {
     null;
   } else if (dropdown.classList.contains("openDrop")) {
     dropdown.classList.remove("openDrop");
     icon.classList.toggle("open");
-    console.log("wq");
-  } else {
-    console.log("naa");
   }
 });
