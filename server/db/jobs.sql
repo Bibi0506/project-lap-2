@@ -1,30 +1,24 @@
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS jobs;
+
 DROP TABLE IF EXISTS volunteerUsers;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS organisations;
 
-CREATE TABLE volunteerUsers(
-    volunteer_id INT GENERATED ALWAYS AS IDENTITY,
+CREATE TABLE Users(
+    id INT GENERATED ALWAYS AS IDENTITY,
+    is_organisation BOOLEAN NOT NULL,
     name VARCHAR(30) NOT NULL,
     email VARCHAR(40) NOT NULL,
     password VARCHAR(20) NOT NULL,
     phone_number INT NOT NULL,
     address VARCHAR(50) NOT NULL,
-    PRIMARY KEY (volunteer_id)
-);
-
-CREATE TABLE organisations(
-    organisation_id INT GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(30) NOT NULL,
-    email VARCHAR(40) NOT NULL,
-    password VARCHAR(20) NOT NULL,
-    phone_number INT NOT NULL,
-    address VARCHAR(50) NOT NULL,
-    PRIMARY KEY (organisation_id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE jobs(
     job_id INT GENERATED ALWAYS AS IDENTITY,
-    organisation_id INT,
+    user_id INT NOT NULL,
     category VARCHAR(20) NOT NULL,
     title VARCHAR(35) NOT NULL,
     description VARCHAR(200) NOT NULL,
@@ -34,22 +28,18 @@ CREATE TABLE jobs(
     num_volunteers INT NOT NULL,
     volunteers INT ARRAY,
     PRIMARY KEY (job_id),
-    FOREIGN KEY (organisation_id) REFERENCES organisations(organisation_id)
-    /*FOREIGN KEY (volunteers) REFERENCES volunteers(volunteer_id)*/
+    FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
-INSERT INTO volunteerUsers (name, email, password, phone_number, address)
+INSERT INTO Users (name, is_organisation, email, password, phone_number, address)
 VALUES
-('Oliver Thomas', 'ssdf@gmail.com', 'qwer', 12332, 'qweqwtg'),
-('Dan Scott', 'dfbb@gmail.com', 'qwer', 12332, 'qweqwtg'),
-('Roberta Capuano', 'tykjgj@gmail.com', 'qwer', 12332, 'qweqwtg'),
-('Sabrina Wright', 'ttn@gmail.com', 'qwer', 12332, 'qweqwtg');
+('Oliver Thomas', false, 'ssdf@gmail.com', 'qwer', 12332, 'qweqwtg'),
+('Dan Scott', false, 'dfbb@gmail.com', 'qwer', 12332, 'qweqwtg'),
+('Roberta Capuano', false, 'tykjgj@gmail.com', 'qwer', 12332, 'qweqwtg'),
+('Sabrina Wright', false, 'ttn@gmail.com', 'qwer', 12332, 'qweqwtg'),
+('Library', true, 'esdfvsf@hotmail.com', 'sdfhe', 123546543, 'dsfbdv');
 
-INSERT INTO organisations (name, email, password, phone_number, address)
+INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers)
 VALUES
-('Library', 'esdfvsf@hotmail.com', 'sdfhe', 123546543, 'dsfbdv');
-
-INSERT INTO jobs (organisation_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers)
-VALUES
-(1, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01 09:00:00', '2023-07-02', 2, 2),
-(1, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06 09:00:00', '2023-07-06', 2, 1);
+(5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01 09:00:00', '2023-07-02', 2, 2),
+(5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06 09:00:00', '2023-07-06', 2, 1);
