@@ -89,10 +89,36 @@ body {
 
 #homepage-right {
   display: flex;
-  margin-top: 50px;
+  margin-top: 75px;
   height: 700px;
   margin-right: 20px;
   background-color: #0b3954;
+}
+
+@media (max-width: 1000px) {
+  #homepage-right {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 870px) {
+  #homepage-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+  #homepage-left {
+    align-self: center;
+    width: 95%;
+  }
+  #homepage-right {
+    margin: 0;
+  }
+}
+
+@media (max-width: 550px) {
+  .homepage-buttons {
+    flex-direction: column;
+  }
 }
 
 #info-container {
@@ -144,6 +170,7 @@ body {
   justify-content: center;
   background-color: #d9d9d9;
   margin-top: 50px;
+  margin-bottom: 30px;
   padding: 25px;
   width: 75%;
   height: 250px;
