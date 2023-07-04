@@ -7,11 +7,11 @@ const jobRouter = Router();
 //GET route to return all job listings
 jobRouter.get("/getall", jobController.index);
 
+//GET route to return all job listings associated to the user on a specific date
+jobRouter.get("/user/:user_id/:date", jobController.userJobsDate);
+
 //GET route to return all job listings associated to the user
 jobRouter.get("/user/:user_id", jobController.userJobs);
-
-//GET route to return all job listings associated to the user on a specific date
-jobRouter.get("/user/:user_id/date", jobController.userJobsDate);
 
 //GET route to return sum of hours worked by user
 jobRouter.get("/hours/user/:user_id", jobController.getHours);

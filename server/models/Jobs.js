@@ -1,15 +1,16 @@
+const { toASCII } = require("punycode");
 const db = require("../db/connect");
 
 class Job{
-    constructor({job_id, organisation_id, category, title, description, start_dateTime, 
-    endDate, hours_needed, num_volunteers}) {
+    constructor({job_id, user_id, category, title, description, start_datetime, 
+    enddate, hours_needed, num_volunteers}) {
         this.job_id = job_id,
-        this.organisation_id = organisation_id,
+        this.user_id = user_id,
         this.category = category,
         this.title = title,
         this.description = description,
-        this.start_dateTime = start_dateTime,
-        this.endDate = endDate,
+        this.start_dateTime = start_datetime,
+        this.endDate = enddate,
         this.hours_needed = hours_needed,
         this.num_volunteers = num_volunteers
     }
@@ -58,21 +59,25 @@ class Job{
     }
 
     static async getUsersJobs(user_id) {
-        const response = await db.query("SELECT J.job_id, J.user_id, J.category, J.title, J.description, J.start_datetime, J.enddate, J.hours_needed, J.num_volunteers FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1", [user_id]);
+        const response = await db.query("SELECT J.* FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1", [user_id]);
 
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions as of yet.")
         }
+        //console.log(response.rows[0].start_dateTime)
+
+        console.log(response.rows[0].start_datetime);
 
         return response.rows.map(job => new Job(job))
     }
 
     static async getUsersJobsByDate(user_id, date) {
-        //' 23:59:59' is added to the date such that the start time doesn't affect whether or not the date is included in the results.
-        const response = await db.query("SELECT J.job_id, J.user_id, J.category, J.title, J.description, J.start_datetime, J.enddate, J.hours_needed, J.num_volunteers FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1 AND J.start_datetime <= $2 AND J.enddate >= $3;", [user_id, date+' 23:59:59', date]);
+        //input time needs to be transformed to '23:59:59.000Z+1' such that the volunteering start time doesn't affect whether they're selected, the endtime needs to be transformed to '00:00:00.000Z+1' for the same reason
+        const response = await db.query("SELECT J.* FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1 AND J.start_datetime <= $2 AND J.enddate >= $3;", [user_id, date+' 23:59:59', date]);
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions on this date as of yet.")
         }
+        console.log(new Date('2023-07-01'));
         return response.rows.map(job => new Job(job))
     }
 
@@ -96,9 +101,9 @@ class Job{
         
         if (!response.rows[0]) {
             return 0
-        } else if (typeof response.rows[0] != 'number') {
-            throw new Error("Failed to retrieve num hours worked by user")
-        }
+        } //else if (typeof response.rows[0] != 'number') {
+           // throw new Error("Failed to retrieve num hours worked by user")
+        //}
 
         return response.rows[0]
     }
@@ -117,6 +122,5 @@ class Job{
       
 
 }
-
 
 module.exports = Job;

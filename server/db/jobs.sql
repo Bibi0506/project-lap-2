@@ -19,8 +19,8 @@ CREATE TABLE jobs(
     category VARCHAR(20) NOT NULL,
     title VARCHAR(35) NOT NULL,
     description VARCHAR(200) NOT NULL,
-    start_dateTime TIMESTAMP NOT NULL,
-    endDate DATE NOT NULL,
+    start_dateTime TIMESTAMPTZ NOT NULL,
+    endDate TIMESTAMPTZ NOT NULL,
     hours_needed INT NOT NULL,
     num_volunteers INT NOT NULL,
     PRIMARY KEY (job_id),
@@ -46,8 +46,8 @@ VALUES
 
 INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers)
 VALUES
-(5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01 09:00:00', '2023-07-02', 2, 2),
-(5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06 09:00:00', '2023-07-06', 2, 1);
+(5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01T09:00:00.000Z', '2023-07-02T23:59:59.000Z', 2, 2),
+(5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1);
 
 INSERT INTO Applications (job_id, user_id) VALUES
 (1, 1),
