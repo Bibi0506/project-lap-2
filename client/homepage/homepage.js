@@ -22,7 +22,6 @@ snippetsNameArray.push(textName);
 snippetsNameArray.push(textNameTwo);
 
 let timer;
-
 let i = 1;
 
 function startTimer() {
@@ -63,5 +62,49 @@ body.addEventListener("click", (e) => {
   } else if (dropdown.classList.contains("openDrop")) {
     dropdown.classList.remove("openDrop");
     icon.classList.toggle("open");
+  }
+});
+
+//modals
+
+const model = document.querySelector(".user-login-model");
+const blueButton = document.querySelector("#blue-button");
+const whiteButton = document.querySelector("#white-button");
+var nameType = document.getElementById("name_type");
+const modalClose = document.querySelector("#modal-close");
+
+modalClose.addEventListener("click", function () {
+  if (model.style.display == "block") {
+    model.style.display = "none";
+  }
+});
+
+blueButton.addEventListener("click", function () {
+  if (model.style.display === "none" || model.style.display === "") {
+    model.style.display = "block";
+  } else {
+    model.style.display = "none";
+  }
+  if (nameType.innerHTML.includes("Business Name :")) {
+    nameType.innerHTML = nameType.innerHTML.replace(
+      "Business Name :",
+      "Name :"
+    );
+  }
+});
+
+whiteButton.addEventListener("click", function () {
+  if (model.style.display === "none" || model.style.display === "") {
+    model.style.display = "block";
+  } else {
+    model.style.display = "none";
+  }
+  if (nameType && nameType.innerHTML.includes("Name :")) {
+    if (!nameType.innerHTML.includes("Business Name :")) {
+      nameType.innerHTML = nameType.innerHTML.replace(
+        "Name :",
+        "Business Name :"
+      );
+    }
   }
 });
