@@ -95,6 +95,7 @@
             <p class="model-label">E-mail :</p>
             <input
               type="email"
+              id="email-login"
               class="login-input"
               placeholder="Email Address"
             /><br />
@@ -102,9 +103,17 @@
 
           <div class="password input-container">
             <p class="model-label">Password :</p>
-            <input type="password" class="login-input" placeholder="Password" />
+            <input
+              type="password"
+              id="password-login"
+              class="login-input"
+              placeholder="Password"
+            />
           </div>
-          <button class="login-button">Log In</button>
+
+          <button type="submit" id="login-submit" class="login-button">
+            Log In
+          </button>
 
           <h3 id="register-text">Register</h3>
           <div class="email input-container">
@@ -112,31 +121,48 @@
             <input
               type="email"
               class="login-input"
+              id="email-register"
               placeholder="Email Address"
             />
           </div>
 
           <div class="password input-container">
             <p class="model-label">Password :</p>
-            <input type="password" class="login-input" placeholder="Password" />
+            <input
+              type="password"
+              id="password-register"
+              class="login-input"
+              placeholder="Password"
+            />
           </div>
           <div class="name input-container">
             <p class="model-label" id="name_type">Name :</p>
-            <input type="name" class="login-input" placeholder="Name" />
+            <input
+              type="name"
+              id="name-register"
+              class="login-input"
+              placeholder="Name"
+            />
           </div>
           <div class="phone-number input-container">
             <p class="model-label">Phone:</p>
             <input
               type="phone-number"
+              id="phone-register"
               class="login-input"
               placeholder="Phone Number"
             />
           </div>
           <div class="address input-container">
             <p class="model-label">Address :</p>
-            <input type="address" class="login-input" placeholder="Address" />
+            <input
+              type="address"
+              id="address-register"
+              class="login-input"
+              placeholder="Address"
+            />
           </div>
-          <button class="login-button">Register</button>
+          <button id="register-submit" class="login-button">Register</button>
         </div>
       </div>
     </div>
