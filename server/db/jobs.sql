@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS Applications;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS token;
 
 CREATE TABLE Users(
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -52,4 +53,12 @@ VALUES
 INSERT INTO Applications (job_id, user_id) VALUES
 (1, 1),
 (1, 2),
-(2, 3);
+
+
+CREATE TABLE token(
+    token_id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    token CHAR(36) UNIQUE NOT NULL,
+    PRIMARY KEY (token_id),
+    FOREIGN KEY (Users) REFERENCES id("user_id")
+);

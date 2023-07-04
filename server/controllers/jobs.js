@@ -107,9 +107,5 @@ async function getHours(req, res) {
     }
 }
 
-
-
-
-
 module.exports = {index, userJobs, userJobsDate, getHours,
                     show, showJobsById, create, destroy};

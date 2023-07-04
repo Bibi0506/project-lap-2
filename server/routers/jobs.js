@@ -1,5 +1,4 @@
-const {Router} = require("express");
-
+const { Router } = require("express");
 const jobController = require("../controllers/jobs");
 
 const jobRouter = Router();
@@ -25,13 +24,10 @@ jobRouter.get("/jobs/:id", jobController.showJobsById);
 jobRouter.post("/", jobController.create);
 //DELETE route to delete job posts
 jobRouter.delete("/:id", jobController.destroy);
-
-//Handles regitration and login
-//jobRouter.post("/register", userController.register);
-//jobRouter.post("/login", userController.login);
-
 //Get all job by category(id?)
 
 jobRouter.get("/:id", jobController.show);
 
-module.exports = jobRouter;
+
+
+module.exports = { jobRouter};
