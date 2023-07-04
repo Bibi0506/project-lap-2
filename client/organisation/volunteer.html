@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volunteer Page</title>
+    <link rel="stylesheet" href="volunteer.css" />
+    <script src="https://kit.fontawesome.com/e0f29e24ce.js" crossorigin="anonymous"></script>
+    <script defer src="volunteer.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar/build/vanilla-calendar.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar/build/themes/light.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar/build/themes/dark.min.css"
+        rel="stylesheet">
+    <!-- Plugin JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar/build/vanilla-calendar.min.js"
+        defer></script>
+      
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Montserrat:wght@700&family=Quicksand:wght@300&family=Tangerine:wght@700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h1>Unity</h1>
+            <p class="sublogo">Post.Volunteer.Connect</p>
+        </div>
+        <div class="nav-buttons">
+            <h1 class="nav-button" id="about-unity">About Unity</h1>
+            <h1 class="nav-button" id="post-job">Post a Job</h1>
+            <h1 class="nav-button">Volunteer</h1>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <div class="left-container">
+            <button id="myButton">Click me</button>
+
+            <div class="top">
+                <div class="user-icon">
+                    <i class="fa-solid fa-user" id="user"></i>
+                </div>
+                <div class="name-hours">name and hours</div>
+            </div>
+            <div class="calendar">
+                <div id="calendar"></div>
+            </div>
+            <div class="left-bottom">
+                <div class="my-info">DATE</div>
+                <div class="booking">
+                    <p class="left-time">TIME :</p>
+                    <p class="left-title"> TITLE :</p>
+                    <p class="left-description"> DESCRIPTION :
+                    <div class="description">
+                        Job Description :<br>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of
+                        type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop
+                        publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+                    </p>
+                    <p class="left-location">LOCATION :</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-container">
+            <div class="dropdown">
+            <div class="filter-by"><i class="fa-solid fa-filter dropdown-toggle" onclick="toggleDropdown()"></i></div>
+            <div id="dropdown-content" class="dropdown-content">
+                <p>Filter 1</p>
+                <p>Filter 2</p>
+                <p>Filter 3</p>
+              </div>
+        </div>
+            <div class="jobs">
+                <div class="left">
+                    <div class="title">Job Title :</div>
+                    <div class="description">
+                        Job Description :<br>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of
+                        type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop
+                        publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+                </div>
+                <div class="middle">
+                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
+                    </div>
+                    <div class="hours">
+                        Hours / day :<p class="import-hours">
+                            5</p>
+                    </div>
+                    <div class="location">
+                        Location :<p class="import-location">
+                            Buckingham palace</p>
+                    </div>
+                </div>
+
+                <div class="job-buttons">
+                    <div class="apply">apply online</div>
+                    <div class="contact">contact employer</div>
+                </div>
+            </div>
+            <div class="jobs">
+                <div class="left">
+                    <div class="title">Job Title :</div>
+                    <div class="description">
+                        Job Description :<br>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of
+                        type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop
+                        publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+                </div>
+                <div class="middle">
+                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
+                    </div>
+                    <div class="hours">
+                        Hours / day :<p class="import-hours">
+                            5</p>
+                    </div>
+                    <div class="location">
+                        Location :<p class="import-location">
+                            Buckingham palace</p>
+                    </div>
+                </div>
+
+                <div class="job-buttons">
+                    <div class="apply">apply online</div>
+                    <div class="contact">contact employer</div>
+                </div>
+            </div>
+            <div class="jobs">
+                <div class="left">
+                    <div class="title">Job Title :</div>
+                    <div class="description">
+                        Job Description :<br>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of
+                        type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop
+                        publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+                </div>
+                <div class="middle">
+                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
+                    </div>
+                    <div class="hours">
+                        Hours / day :<p class="import-hours">
+                            5</p>
+                    </div>
+                    <div class="location">
+                        Location :<p class="import-location">
+                            Buckingham palace</p>
+                    </div>
+                </div>
+
+                <div class="job-buttons">
+                    <div class="apply">apply online</div>
+                    <div class="contact">contact employer</div>
+                </div>
+            </div>
+            <div class="jobs">
+                <div class="left">
+                    <div class="title">Job Title :</div>
+                    <div class="description">
+                        Job Description :<br>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of
+                        type and scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop
+                        publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+                </div>
+                <div class="middle">
+                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
+                    </div>
+                    <div class="hours">
+                        Hours / day :<p class="import-hours">
+                            5</p>
+                    </div>
+                    <div class="location">
+                        Location :<p class="import-location">
+                            Buckingham palace</p>
+                    </div>
+                </div>
+
+                <div class="job-buttons">
+                    <div class="apply">apply online</div>
+                    <div class="contact">contact employer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-container">
+        <div class="user-login-model">
+            <div class="modal-centering-container">
+                <i class="fa-solid fa-x" id="modal-close"></i>
+
+                <div class="name-container">
+                    <p class="name-info">Name :</p>
+                    <p class="update-name">Name</p>
+                </div>
+                <div class="email-container">
+                    <p class="email-info">email :</p>
+                    <p class="update-name">Email</p>
+                </div>
+
+                <div class="address-container">
+                    <p class="address-info">Address :</p>
+                    <p class="update-address">Address</ip>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  
+
+</body>
+
+</html>
