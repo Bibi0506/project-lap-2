@@ -1,13 +1,5 @@
 const Job = require("../models/Jobs");
 
-
-
-function home(req, res) {
-    res.send("Welcome to the job portal!"); 
-  
-  };
-  
-
 // GET route returning all listed jobs, ordered by start date
 async function index(req, res) {
     try {
@@ -21,16 +13,17 @@ async function index(req, res) {
 //GET route to get all position by organization_id
 async function show(req, res) {
     try {
-      const user_id = req.params.id;
-  
-      const positions = await Job.getPositionByUserId(user_id);
-  
-      res.status(200).send(positions);
-    } catch (err) {
-      res.status(404).send({ error: err.message });
-    } 
+        const organisation_id = req.params.id;
+        //retrieve the positions by organisation ID
+        const positions = await Job.getPositionByOrganisationId(organisation_id);
+
+        res.status(200).send(positions)
+    } catch(err) {
+        res.status(404).send({"error": err.message});
+    }
 
 }
+
 
 //GET route to get all jobs by jobs_id 
 async function showJobsById(req, res) {
@@ -38,7 +31,7 @@ async function showJobsById(req, res) {
       const job_id = req.params.id;
   
       // Retrieve the job by its ID
-      const job = await Jobs.getJobById(job_id);
+      const job = await Job.getJobById(job_id);
       if (!job) {
         throw new Error("Job not found."); // Throw an error if the job is not found
       }
@@ -56,7 +49,7 @@ async function create(req, res) {
     try{
         const data = req.body;
         const response = await Job.createJob(data);
-        res.status(201).send(newJob);
+        res.status(201).send(response);
     } catch (err) {
         res.status(400).send({"error": err.message})
     }
@@ -67,7 +60,7 @@ async function userJobs(req, res) {
     try {
         user_id = parseInt(req.params.user_id);
         const jobs = await Job.getUsersJobs(user_id);
-
+        //console.log(jobs)
         res.status(200).send(jobs);
     } catch(err) {
         res.status(404).send({"error": err.message});
@@ -88,21 +81,20 @@ async function userJobsDate(req, res) {
     }
 }
 
-
 async function destroy(req, res) {
     try {
-        const jobId = req.params.id;
-        const job = await Jobs.getJobById(jobId); //retrieve a job by its ID
+        const job_id = req.params.id;
+        const job = await Job.getJobById(job_id); // Retrieve a job by its ID
       
         if (!job) {
             throw new Error("Job not found."); // Throw an error if the job is not found
         }
         await job.destroy(); // Call the destroy method on the job instance
-          res.status(204).end(); // Send a 204 No Content response to indicate successful deletion
+        res.status(204).end(); // Send a 204 No Content response to indicate successful deletion
     } catch (err) {
         res.status(404).send({ error: err.message }); // Send a 404 Not Found response if there's an error
-        }
-      }
+    }
+}
 
 async function getHours(req, res) {
     try {
@@ -119,5 +111,5 @@ async function getHours(req, res) {
 
 
 
-module.exports = {home, index, userJobs, userJobsDate, getHours,
+module.exports = {index, userJobs, userJobsDate, getHours,
                     show, showJobsById, create, destroy};
