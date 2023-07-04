@@ -1,4 +1,3 @@
-const { toASCII } = require("punycode");
 const db = require("../db/connect");
 
 class Job{
@@ -64,9 +63,6 @@ class Job{
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions as of yet.")
         }
-        //console.log(response.rows[0].start_dateTime)
-
-        console.log(response.rows[0].start_datetime);
 
         return response.rows.map(job => new Job(job))
     }
@@ -77,7 +73,6 @@ class Job{
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions on this date as of yet.")
         }
-        console.log(new Date('2023-07-01'));
         return response.rows.map(job => new Job(job))
     }
 
@@ -101,9 +96,7 @@ class Job{
         
         if (!response.rows[0]) {
             return 0
-        } //else if (typeof response.rows[0] != 'number') {
-           // throw new Error("Failed to retrieve num hours worked by user")
-        //}
+        }
 
         return response.rows[0]
     }

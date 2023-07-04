@@ -15,7 +15,7 @@ async function show(req, res) {
     try {
         const organisation_id = req.params.id;
         //retrieve the positions by organisation ID
-        const positions = await getPositionByOrganisationId(organisation_id);
+        const positions = await Job.getPositionByOrganisationId(organisation_id);
 
         res.status(200).send(positions)
     } catch(err) {

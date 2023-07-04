@@ -1,35 +1,35 @@
-//Note: These tests are testing using the mock data supplied when 'npm run setup-db' is run.
-// Therefore the aforementioned command must be run before running these tests.
+//const app = require("../app");
+//const request = require("supertest");
+
+//describe("GET jobs/getall", ()=>{
+
+//    test("responds with a status code of 200", async()=>{
+//        const response = await request(app).get("/jobs/getall")
+//        expect(response.statusCode).toBe(200)
+//    })
+
+//})
 
 
-const request = require("supertest");
-const app = require("../app");
 
-describe('api server', () => {
-    let api;
 
-    beforeAll(() => {
-        api = app.listen(5000, () => { //test port must be different to production port
-            console.log('Test server running on port 5000');
+
+const { beforeEach } = require("node:test");
+const jobController = require("../controllers/jobs");
+const Job = require("../models/Jobs");
+
+const mockSend = jest.fn();
+const mockStatus = jest.fn(code => ({send:mockSend, end:jest.fn()}));
+const mockRes = {status:mockStatus};
+
+describe("Jobs Controller Tests", () => {
+    beforeEach(() => jest.clearAllMocks());
+
+    afterAll(() => jest.resetAllMocks());
+
+    describe("Testing index() ", () => {
+        test("Responds with a 200 status code", async () => {
+            let 
         })
     })
-
-    afterAll((done) => {
-        console.log("Gracefully stopping test server");
-        api.close(done);
-    })
-
-    test("first route responds with status code 200", (done) => {
-        request(api)
-            .get("/jobs/getall")
-            .expect(200, done)
-            //.end(function(err, res) {
-            //    if (err) throw err;
-            //    console.log(res.body);
-          //})
-            
-    })
-
-
 })
-

@@ -16,7 +16,8 @@
   "scripts": {
     "setup-db": "node ./db/setup.js",
     "dev": "nodemon -L ./index.js",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "start":"node ./index.js"
   },
   "author": "",
   "license": "ISC",
