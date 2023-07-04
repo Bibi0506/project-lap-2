@@ -17,11 +17,4 @@ function postCreated (e){
     console.log (data);
 }
 
-  // Create an array to hold the data for each input field
-
-
-  // Loop through each input field and retrieve the values
-  
-    // Create an object for each input field and push it to the data array
-    
     

@@ -19,43 +19,75 @@
             <h1 class="nav-button" id="post-job">Post a Job</h1>
             <h1 class="nav-button">Volunteer</h1>
         </div>
+        <div class="icon center" alt="options symbol">
+            <span class="referenceForNav"></span>
+            <span class="referenceForNav"></span>
+            <span class="referenceForNav"></span>
+          </div>
+        </div>
+        <div class="dropdown_menu" id="dropdown-menu">
+          <a href="#" href="#">About Unity</a>
     </div>
     <div class="page">
     <div class=" job-box">
         <form class ="job-post" id="postForm">
             <h1 id="header">Add Job</h1>
-            <label class= "titles" > Job Category 
+            <div class="job-container">
+            <label class= "titles" > Job Category
             </label> 
             <input class="job-form" id= "job-category" type="text" > 
             <br>
+            </div>
+
+            <div class ="titles-container">
             <label class= "titles" >Job Title  
             </label>
             <input class="job-form" id= "job-title" type="text" >
             <br>
-            <label class= "titles" >Job Description 
+            </div>
+
+            <div class ="description-container">
+            <label class= "titles" >Job Description
             </label>
             <input class="job-form" id = "job-description" type="text" >
             <br>
+            </div>
+
+            <div class ="start-container">
             <label class= "titles" ></label>Start Date
             </label>
             <input class="job-form" id = "start-date" type="text" >
             <br>
+            </div>
+
+            <div class ="end-container">
             <label class= "titles" > End Date
             </label>
             <input class="job-form" id= "end-date" type="text" >
             <br>
+            </div>
+
+            <div class ="time-container">
             <label class= "titles" ></label>Start Time
             </label>
             <input class="job-form" id = "start-time" type="text" >
             <br>
+            </div>
+
+            <div class ="hours-container">
             <label class= "titles" ></label>Total hours per day
             </label>
             <input class="job-form" id= "total-hours" type="text" >
             <br>
+            </div>
+
+            <div class ="titles-container">
             <label class= "titles" ></label>Total positions
             </label>
             <input class="job-form" id= "total-positions" type="text" >
             <br>
+            </div>
+
             <br>
             <input type = "submit" value = "Post" id ="post-btn">
         </form>

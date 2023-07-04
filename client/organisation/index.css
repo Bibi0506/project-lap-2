@@ -65,25 +65,46 @@ body {
     display:block;
     align-items: center;
     border-radius: 10px;
-    font-family: "Quicksand";
+    font-family: Quicksand;
 
   }
 
-  .job-post {
+  .job-post form div{
     height: 60%;
     margin-top: 5%;
     padding: 10px;
-    display:contents;
+    display:flex;
+    flex-wrap: row wrap;
+    align-items: center;
     border-radius: 10px;
-    font-family: "Quicksand";
+    font-family: Quicksand;
   }
 
+  .title-container,
+  .job-container,
+  .description-container,
+  .start-container,
+  .end-container,
+  .time-container,
+  .hours-container{
+    display:flex;
+    flex-direction: row;
+    align-items:end;
+
+  }
+
+  .titles{
+    
+  }
+
+
   .job-form{
+    align-self:self-end;
     margin-left: 20%;
-    width: 50%;
+    width: 40%;
     padding: 10px 15px;
     border-radius: 10px;
-    display:grid;
+    
      
   }
 
