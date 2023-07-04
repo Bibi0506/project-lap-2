@@ -67,7 +67,7 @@ body.addEventListener("click", (e) => {
 
 //modals
 
-const model = document.querySelector(".user-login-model");
+const model = document.querySelector(".modal-container");
 const blueButton = document.querySelector("#blue-button");
 const whiteButton = document.querySelector("#white-button");
 var nameType = document.getElementById("name_type");
@@ -82,8 +82,10 @@ modalClose.addEventListener("click", function () {
 blueButton.addEventListener("click", function () {
   if (model.style.display === "none" || model.style.display === "") {
     model.style.display = "block";
+    body.style.overflow = "hidden";
   } else {
     model.style.display = "none";
+    body.style.overflow = "auto";
   }
   if (nameType.innerHTML.includes("Business Name :")) {
     nameType.innerHTML = nameType.innerHTML.replace(
@@ -96,8 +98,10 @@ blueButton.addEventListener("click", function () {
 whiteButton.addEventListener("click", function () {
   if (model.style.display === "none" || model.style.display === "") {
     model.style.display = "block";
+    body.style.overflow = "hidden";
   } else {
     model.style.display = "none";
+    body.style.overflow = "auto";
   }
   if (nameType && nameType.innerHTML.includes("Name :")) {
     if (!nameType.innerHTML.includes("Business Name :")) {

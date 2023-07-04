@@ -340,26 +340,7 @@ body {
 #modal-close:hover {
   opacity: 70%;
 }
-.user-login-model {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  height: 70%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 50%;
-  z-index: 2;
-  transform: translate(-50%, -50%);
-  background-color: #f8f8f8;
-  padding: 20px;
-  border-radius: 30px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  color: white;
-  padding: 40px;
-  background-color: #0b3954;
-}
+
 .user-login-model h3 {
   margin-top: 0;
   font-size: 24px;
@@ -400,7 +381,8 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 20%;
+  width: 40%;
+  max-width: 150px;
   height: 5%;
   margin-top: 15px;
   scale: 130%;
@@ -450,13 +432,9 @@ body {
 @media (max-width: 860px) {
   .modal-centering-container div {
     flex-direction: column;
-    margin-left: 80px;
   }
   .login-input {
     width: 75%;
-  }
-  .user-login-model h3 {
-    margin-left: 30px;
   }
 }
 
@@ -466,6 +444,9 @@ body {
   }
   .login-input {
     width: 90%;
+  }
+  .login-button {
+    width: 60%;
   }
 }
 
@@ -482,6 +463,7 @@ body {
 
 .user-login-model::-webkit-scrollbar {
   width: 1em;
+  display: none;
 }
 
 .user-login-model::-webkit-scrollbar-thumb {
@@ -491,4 +473,32 @@ body {
   border-bottom-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+
+.modal-container {
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+  position: fixed;
+}
+
+.user-login-model {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 70%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
+  padding: 40px;
+  background-color: #0b3954;
 }
