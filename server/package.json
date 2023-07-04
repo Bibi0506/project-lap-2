@@ -14,9 +14,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "setup-db": "node ./server/db/setup.js",
-    "dev": "nodemon -L ./server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup-db": "node ./db/setup.js",
+    "dev": "nodemon -L ./index.js",
+    "test": "jest --watchAll"
   },
   "author": "",
   "license": "ISC",
