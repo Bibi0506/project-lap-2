@@ -1,14 +1,14 @@
 DROP TABLE IF EXISTS Applications;
+DROP TABLE IF EXISTS token;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS token;
 
 CREATE TABLE Users(
     id INT GENERATED ALWAYS AS IDENTITY,
     is_organisation BOOLEAN NOT NULL,
     name VARCHAR(30) NOT NULL,
     email VARCHAR(40) NOT NULL,
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     phone_number INT NOT NULL,
     address VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
@@ -61,5 +61,5 @@ VALUES
 
 INSERT INTO Applications (job_id, user_id) VALUES
 (1, 1),
-(1, 2);
+(1, 2)
 
