@@ -1,9 +1,12 @@
-const Job = require("../models/Jobs");
+const Job = require("../models/Jobs.js");
 
 // GET route returning all listed jobs, ordered by start date
 async function index(req, res) {
     try {
         const jobs = await Job.getAllJobsOrderedByDateAsc();
+        if (jobs.length<1) {
+            throw new Error("No jobs in database");
+        }
         res.status(200).send(jobs);
     } catch(err) {
         res.status(500).send({"error": err.message});
@@ -106,10 +109,6 @@ async function getHours(req, res) {
         res.status(500).send({"error": err.message});
     }
 }
-
-
-
-
 
 module.exports = {index, userJobs, userJobsDate, getHours,
                     show, showJobsById, create, destroy};
