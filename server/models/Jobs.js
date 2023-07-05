@@ -30,7 +30,7 @@ class Job{
 
     static async getAllJobsOrderedByDateAsc() {
         const response = await db.query("SELECT * FROM jobs ORDER BY start_dateTime");
-        if (response.rows.length<1) {
+        if (!response.rows.length>0) {
             throw new Error("No jobs in database")
         }
 
@@ -112,7 +112,6 @@ class Job{
       }
 
 
-      
 
 }
 

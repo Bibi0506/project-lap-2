@@ -10,4 +10,3 @@ db.query(sql)
     console.log("Setup complete");
   })
   .catch(error => console.log(error));
-

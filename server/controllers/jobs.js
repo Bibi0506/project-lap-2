@@ -4,6 +4,9 @@ const Job = require("../models/Jobs.js");
 async function index(req, res) {
     try {
         const jobs = await Job.getAllJobsOrderedByDateAsc();
+        if (jobs.length<1) {
+            throw new Error("No jobs in database");
+        }
         res.status(200).send(jobs);
     } catch(err) {
         res.status(500).send({"error": err.message});
@@ -24,13 +27,14 @@ async function show(req, res) {
 
 }
 
+
 //GET route to get all jobs by jobs_id 
 async function showJobsById(req, res) {
     try {
       const job_id = req.params.id;
   
       // Retrieve the job by its ID
-      const job = await Jobs.getJobById(job_id);
+      const job = await Job.getJobById(job_id);
       if (!job) {
         throw new Error("Job not found."); // Throw an error if the job is not found
       }
@@ -48,7 +52,7 @@ async function create(req, res) {
     try{
         const data = req.body;
         const response = await Job.createJob(data);
-        res.status(201).send(newJob);
+        res.status(201).send(response);
     } catch (err) {
         res.status(400).send({"error": err.message})
     }
@@ -80,21 +84,20 @@ async function userJobsDate(req, res) {
     }
 }
 
-
 async function destroy(req, res) {
     try {
-        const jobId = req.params.id;
-        const job = await Jobs.getJobById(jobId); //retrieve a job by its ID
+        const job_id = req.params.id;
+        const job = await Job.getJobById(job_id); // Retrieve a job by its ID
       
         if (!job) {
             throw new Error("Job not found."); // Throw an error if the job is not found
         }
         await job.destroy(); // Call the destroy method on the job instance
-          res.status(204).end(); // Send a 204 No Content response to indicate successful deletion
+        res.status(204).end(); // Send a 204 No Content response to indicate successful deletion
     } catch (err) {
         res.status(404).send({ error: err.message }); // Send a 404 Not Found response if there's an error
-        }
-      }
+    }
+}
 
 async function getHours(req, res) {
     try {
