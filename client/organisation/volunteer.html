@@ -18,7 +18,7 @@
     <!-- Plugin JS -->
     <script src="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar/build/vanilla-calendar.min.js"
         defer></script>
-      
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -53,206 +53,48 @@
                 <div id="calendar"></div>
             </div>
             <div class="left-bottom">
-                <div class="my-info">DATE</div>
-                <div class="booking">
-                    <p class="left-time">TIME :</p>
-                    <p class="left-title"> TITLE :</p>
-                    <p class="left-description"> DESCRIPTION :
-                    <div class="description">
-                        Job Description :<br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of
-                        type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop
-                        publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
-                    </div>
-                    </p>
-                    <p class="left-location">LOCATION :</p>
-                </div>
+               
+                
             </div>
         </div>
 
         <div class="right-container">
             <div class="dropdown">
-            <div class="filter-by"><i class="fa-solid fa-filter dropdown-toggle" onclick="toggleDropdown()"></i></div>
-            <div id="dropdown-content" class="dropdown-content">
-                <p>Filter 1</p>
-                <p>Filter 2</p>
-                <p>Filter 3</p>
-              </div>
+                <div class="filter-by"><i class="fa-solid fa-filter dropdown-toggle" onclick="toggleDropdown()"></i>
+                </div>
+                <div id="dropdown-content" class="dropdown-content">
+                    <p>Filter 1</p>
+                    <p>Filter 2</p>
+                    <p>Filter 3</p>
+                </div>
+            </div>
+            
+
         </div>
-            <div class="jobs">
-                <div class="left">
-                    <div class="title">Job Title :</div>
-                    <div class="description">
-                        Job Description :<br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of
-                        type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop
-                        publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
-                    </div>
-                </div>
-                <div class="middle">
-                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
-                    </div>
-                    <div class="hours">
-                        Hours / day :<p class="import-hours">
-                            5</p>
-                    </div>
-                    <div class="location">
-                        Location :<p class="import-location">
-                            Buckingham palace</p>
-                    </div>
-                </div>
 
-                <div class="job-buttons">
-                    <div class="apply">apply online</div>
-                    <div class="contact">contact employer</div>
-                </div>
-            </div>
-            <div class="jobs">
-                <div class="left">
-                    <div class="title">Job Title :</div>
-                    <div class="description">
-                        Job Description :<br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of
-                        type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop
-                        publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
+        <div class="modal-container">
+            <div class="user-login-model">
+                <div class="modal-centering-container">
+                    <i class="fa-solid fa-x" id="modal-close"></i>
+    
+                    <div class="name-container">
+                        <p class="name-info">Name :</p>
+                        <p class="update-name">Name</p>
                     </div>
-                </div>
-                <div class="middle">
-                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
+                    <div class="email-container">
+                        <p class="email-info">email :</p>
+                        <p class="update-name">Email</p>
                     </div>
-                    <div class="hours">
-                        Hours / day :<p class="import-hours">
-                            5</p>
+    
+                    <div class="address-container">
+                        <p class="address-info">Address :</p>
+                        <p class="update-address">Address</ip>
                     </div>
-                    <div class="location">
-                        Location :<p class="import-location">
-                            Buckingham palace</p>
-                    </div>
-                </div>
-
-                <div class="job-buttons">
-                    <div class="apply">apply online</div>
-                    <div class="contact">contact employer</div>
-                </div>
-            </div>
-            <div class="jobs">
-                <div class="left">
-                    <div class="title">Job Title :</div>
-                    <div class="description">
-                        Job Description :<br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of
-                        type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop
-                        publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
-                    </div>
-                </div>
-                <div class="middle">
-                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
-                    </div>
-                    <div class="hours">
-                        Hours / day :<p class="import-hours">
-                            5</p>
-                    </div>
-                    <div class="location">
-                        Location :<p class="import-location">
-                            Buckingham palace</p>
-                    </div>
-                </div>
-
-                <div class="job-buttons">
-                    <div class="apply">apply online</div>
-                    <div class="contact">contact employer</div>
-                </div>
-            </div>
-            <div class="jobs">
-                <div class="left">
-                    <div class="title">Job Title :</div>
-                    <div class="description">
-                        Job Description :<br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of
-                        type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop
-                        publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
-                    </div>
-                </div>
-                <div class="middle">
-                    <div class="dates">Dates : <p class="import-dates">17/01/2023 - 20/01/2023</p>
-                    </div>
-                    <div class="hours">
-                        Hours / day :<p class="import-hours">
-                            5</p>
-                    </div>
-                    <div class="location">
-                        Location :<p class="import-location">
-                            Buckingham palace</p>
-                    </div>
-                </div>
-
-                <div class="job-buttons">
-                    <div class="apply">apply online</div>
-                    <div class="contact">contact employer</div>
                 </div>
             </div>
         </div>
-    </div>
+        
 
-    <div class="modal-container">
-        <div class="user-login-model">
-            <div class="modal-centering-container">
-                <i class="fa-solid fa-x" id="modal-close"></i>
-
-                <div class="name-container">
-                    <p class="name-info">Name :</p>
-                    <p class="update-name">Name</p>
-                </div>
-                <div class="email-container">
-                    <p class="email-info">email :</p>
-                    <p class="update-name">Email</p>
-                </div>
-
-                <div class="address-container">
-                    <p class="address-info">Address :</p>
-                    <p class="update-address">Address</ip>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-  
 
 </body>
 
