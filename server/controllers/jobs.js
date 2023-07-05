@@ -4,9 +4,6 @@ const Job = require("../models/Jobs.js");
 async function index(req, res) {
     try {
         const jobs = await Job.getAllJobsOrderedByDateAsc();
-        if (jobs.length<1) {
-            throw new Error("No jobs in database");
-        }
         res.status(200).send(jobs);
     } catch(err) {
         res.status(500).send({"error": err.message});

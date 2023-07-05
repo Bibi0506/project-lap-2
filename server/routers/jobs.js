@@ -8,7 +8,7 @@ const {
 const jobRouter = Router();
 
 //GET route to return all job listings
-jobRouter.get("/getall", authenticatorVolunteer, jobController.index);
+jobRouter.get("/getall", /*authenticatorVolunteer,*/ jobController.index);
 
 //GET route to return all job listings associated to the user on a specific date
 jobRouter.get("/user/:user_id/:date", jobController.userJobsDate);
@@ -21,8 +21,8 @@ jobRouter.get("/hours/user/:user_id", jobController.getHours);
 
 //GET route to get all position by organization_id
 jobRouter.get(
-  "/organisations/:id",
-  authenticatorOrganisation,
+  "/organisations/:id",/*
+  authenticatorOrganisation,*/
   jobController.show
 );
 
