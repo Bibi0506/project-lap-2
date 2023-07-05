@@ -14,7 +14,7 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
     }),
   };
 
-  const response = await fetch("http://localhost:3002/users/login", options);
+  const response = await fetch("http://localhost:3001/users/login", options);
   const data = await response.json();
   console.log(data);
 
@@ -46,7 +46,15 @@ document
       isOrganisation = false;
     }
 
-    console.log(isOrganisation);
+    let textTest = password;
+    let pattern =
+      /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/;
+    let result = pattern.test(textTest);
+    if (!result) {
+      alert(
+        "Your password must be at least 8 characters, including one lowercase, one uppercase, one special character and a number"
+      );
+    }
 
     const options = {
       method: "POST",
@@ -65,14 +73,13 @@ document
     };
 
     const response = await fetch(
-      "http://localhost:3002/users/register",
+      "http://localhost:3001/users/register",
       options
     );
     const data = await response.json();
     console.log(data);
 
     if (response.status == 201) {
-      console.log("yoo");
       window.location.assign("homepage.html");
     } else {
       alert(data.error);
