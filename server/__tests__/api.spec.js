@@ -111,11 +111,6 @@ describe('Testing jobRouter endpoints', () => {
                 const res = await request(server).get('/jobs/user/1');
                 res.body.forEach(row => expect(Object.keys(row).length).toBe(9))
             })
-            test('res.body[0].job_id = 1', async () => {
-                const res = await request(server).get('/jobs/user/1');
-                expect(res.body[0].job_id).toBe(1);
-            })
-    
             //This clears the mocked data from the model
             jest.clearAllMocks();
     

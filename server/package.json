@@ -17,7 +17,8 @@
     "setup-db": "node ./db/setup.js",
     "dev": "nodemon -L ./index.js",
     "test": "jest --watchAll",
-    "start":"node ./index.js"
+    "start":"node ./index.js",
+    "coverage":"jest --coverage"
   },
   "author": "",
   "license": "ISC",
