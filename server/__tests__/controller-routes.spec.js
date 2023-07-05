@@ -164,7 +164,7 @@ describe('Testing jobRouter endpoints', () => {
             jobModel.getUsersJobs([]);
             const res = await request(server).get('/jobs/user/1');
             console.log(res.body);
-            expect(res.body).toBe()
+            expect(res.body).toBe(1)
         })       
     
     
