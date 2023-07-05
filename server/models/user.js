@@ -7,7 +7,7 @@ class User {
         this.username = username;
         this.password = password;
         this.isAdmin = is_admin;
-    }
+    }//implement all the details that are not null from the table
 
     //gets users by ID
     static async getOneById(id) {

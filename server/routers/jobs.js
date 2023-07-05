@@ -30,4 +30,4 @@ jobRouter.get("/:id", jobController.show);
 
 
 
-module.exports = { jobRouter};
+module.exports = jobRouter;

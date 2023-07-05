@@ -37,6 +37,14 @@ CREATE TABLE Applications(
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
+CREATE TABLE token(
+    token_id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    token CHAR(36) UNIQUE NOT NULL,
+    PRIMARY KEY (token_id),
+    FOREIGN KEY (Users) REFERENCES id("user_id")
+);
+
 INSERT INTO Users (name, is_organisation, email, password, phone_number, address)
 VALUES
 ('Oliver Thomas', false, 'ssdf@gmail.com', 'qwer', 12332, 'qweqwtg'),
@@ -54,11 +62,3 @@ INSERT INTO Applications (job_id, user_id) VALUES
 (1, 1),
 (1, 2),
 
-
-CREATE TABLE token(
-    token_id INT GENERATED ALWAYS AS IDENTITY,
-    user_id INT NOT NULL,
-    token CHAR(36) UNIQUE NOT NULL,
-    PRIMARY KEY (token_id),
-    FOREIGN KEY (Users) REFERENCES id("user_id")
-);
