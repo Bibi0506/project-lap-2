@@ -1,30 +1,31 @@
-document.querySelector("#login-submit").addEventListener("click", async () => {
-  const password = document.querySelector("#password-login").value;
-  const username = document.querySelector("#email-login").value;
+// document.querySelector("#login-submit").addEventListener("click", async () => {
+//   const password = document.querySelector("#password-login").value;
+//   const username = document.querySelector("#email-login").value;
 
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: username,
-      password: password,
-    }),
-  };
+//   const options = {
+//     method: "POST",
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       email: username,
+//       password: password,
+//     }),
+//   };
 
-  const response = await fetch("http://localhost:3001/user/login", options);
-  const data = await response.json();
+//   const response = await fetch("http://localhost:3002/users/login", options);
+//   const data = await response.json();
+//   console.log(data);
 
-  if (response.status == 200) {
-    console.log("yoo");
-    window.location.assign("homepage.html");
-  } else {
-    alert(data.error);
-    console.log("naaa");
-  }
-});
+// if (response.status == 200) {
+//   console.log("yoo");
+//   window.location.assign("homepage.html");
+// } else {
+//   alert(data.error);
+//   console.log("naaa");
+// }
+// });
 
 document
   .querySelector("#register-submit")
@@ -62,10 +63,11 @@ document
     };
 
     const response = await fetch(
-      "http://localhost:3001/user/register",
+      "http://localhost:3002/users/register",
       options
     );
     const data = await response.json();
+    console.log(data);
 
     if (response.status == 200) {
       console.log("yoo");
@@ -75,4 +77,3 @@ document
       console.log("naaa");
     }
   });
-``;
