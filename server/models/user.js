@@ -14,7 +14,7 @@ class User {
 
     //gets users by ID
     static async getOneById(id) {
-        const response = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+        const response = await db.query("SELECT * FROM Users WHERE id = $1", [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate user.");
         }
@@ -23,7 +23,8 @@ class User {
 
     //gets user by user name/email 
     static async getOneByUsername(email) {
-        const response = await db.query("SELECT * FROM users WHERE username = $1", [email]);
+        const response = await db.query("SELECT * FROM Users WHERE email = $1", [email]);
+        console.log(response.rows);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate user.");
         }
