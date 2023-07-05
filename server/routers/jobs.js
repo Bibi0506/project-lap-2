@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const jobController = require("../controllers/jobs");
+//const {authenticatorVolunteer, authenticatorOrganisation} = require("../middleware/authenticator");
 
 const jobRouter = Router();
 
 //GET route to return all job listings
-jobRouter.get("/getall", jobController.index);
+jobRouter.get("/getall",/* authenticatorVolunteer,*/ jobController.index);
 
 //GET route to return all job listings associated to the user on a specific date
 jobRouter.get("/user/:user_id/:date", jobController.userJobsDate);
@@ -16,7 +17,7 @@ jobRouter.get("/user/:user_id", jobController.userJobs);
 jobRouter.get("/hours/user/:user_id", jobController.getHours);
 
 //GET route to get all position by organization_id
-jobRouter.get("/organisations/:id", jobController.show);
+jobRouter.get("/organisations/:id", /*authenticatorOrganisation,*/ jobController.show);
 
 //GET route to get all jobs by id
 jobRouter.get("/jobs/:id", jobController.showJobsById);

@@ -4,17 +4,18 @@ const db = require("../db/connect");
 
 class Token {
 
-    constructor({ token_id, user_id, token }){
+    constructor({ token_id, user_id, token, is_organisation }){
         this.token_id = token_id;
         this.user_id = user_id;
         this.token = token;
+        this.is_organisation = is_organisation;
     }
 
     static async create(user_id) {
         //generate token & store it in the db
         const token = uuidv4();
-        const response = await db.query("INSERT INTO token (user_id, token) VALUES ($1, $2) RETURNING token_id;",
-            [user_id, token]);
+        const response = await db.query("INSERT INTO token (user_id, token, is_organisation) VALUES ($1, $2, $3) RETURNING token_id;",
+            [user_id, token, is_organisation]);
         const newId = response.rows[0].token_id;
         const newToken = await Token.getOneById(newId);
         return newToken;
