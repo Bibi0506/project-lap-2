@@ -2,7 +2,7 @@
   "name": "client",
   "version": "1.0.0",
   "description": "",
-  "main": "../homepage/homepage.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
     "dev": "live-server",
