@@ -76,6 +76,7 @@ const modalClose = document.querySelector("#modal-close");
 modalClose.addEventListener("click", function () {
   if (model.style.display == "block") {
     model.style.display = "none";
+    body.style.overflow = "auto";
   }
 });
 

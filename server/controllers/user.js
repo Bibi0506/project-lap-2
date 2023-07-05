@@ -24,13 +24,13 @@ async function register (req, res) {
 async function login (req, res) {
     const data = req.body;
     try {
-        const user = await User.getOneByUsername(data.username);
+        const user = await User.getOneByUsername(data.email);
         console.log("User", user)
         const authenticated = await bcrypt.compare(data.password, user["password"]);
         console.log("Authentificated", authenticated)
         if (!authenticated) {
             throw new Error("Incorrect credentials.");
-        } else {
+        } else { //create a new token spec. associated with the user 
             const token = await Token.create(user.id);
             res.status(200).json({ authenticated: true, token: token.token });
         }
@@ -42,4 +42,4 @@ async function login (req, res) {
 
 module.exports = {
     register, login
-}                           
+};                           

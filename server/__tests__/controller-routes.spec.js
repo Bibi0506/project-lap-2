@@ -68,6 +68,7 @@ describe('Testing jobRouter endpoints', () => {
             
             expect(res.status).toBe(500);
         })
+    })
 
 //----------------------------------------------------------------------------------------------------------------------------
 
@@ -121,14 +122,54 @@ describe('Testing jobRouter endpoints', () => {
                 
                 expect(res.status).toBe(500);
             })        
-        
-
-    
-    
-    
-    
-    
-    
         })
+//----------------------------------------------------------------------------------------------------------------------------
+
+    jest.clearAllMocks();
+    describe('GET jobs by User and date /jobs/user/:user_id/:date', () => {
+        test('sends response with status code of 200', async () => {
+            //This mocks data being returned from the Model
+            jobModel.getUsersJobs.mockResolvedValue([{
+                "job_id": 1,
+                "user_id": 5,
+                "category": "Customer Services",
+                "title": "Library Assistant",
+                "description": "You will be assisting the manager to re-organise the bookshelves",
+                "start_dateTime": "2023-07-01T09:00:00.000Z",
+                "endDate": "2023-07-02T23:59:59.000Z",
+                "hours_needed": 2,
+                "num_volunteers": 2
+            }]);
+
+            const res = await request(server).get('/jobs/user/1/2023-07-01');
+            expect(res.status).toBe(200);
+        })
+        test('response body has a length of 1', async () => {
+            const res = await request(server).get('/jobs/user/1');
+            expect(res.body).toHaveLength(1);
+        })
+        test('all objects in res.body have property "job_id"', async () => {
+            const res = await request(server).get('/jobs/user/1');
+            res.body.forEach(row => expect(row).toHaveProperty("job_id"))
+        })
+        test('each object in res.body has 9 properties', async () => {
+            const res = await request(server).get('/jobs/user/1');
+            res.body.forEach(row => expect(Object.keys(row).length).toBe(9))
+        })
+        //This clears the mocked data from the model
+        jest.clearAllMocks();
+
+        test('sends response with status code of 500 when no data is available', async () => {
+            //Mocks the case where no data is available
+            jobModel.getUsersJobs([]);
+            const res = await request(server).get('/jobs/user/1');
+            console.log(res.body);
+            expect(res.body).toBe()
+        })       
+    
+    
+    
+    
+    
     })
 })
