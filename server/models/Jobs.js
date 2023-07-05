@@ -2,7 +2,7 @@ const db = require("../db/connect");
 
 class Job{
     constructor({job_id, user_id, category, title, description, start_datetime, 
-    enddate, hours_needed, num_volunteers}) {
+    enddate, hours_needed, num_volunteers, address}) {
         this.job_id = job_id,
         this.user_id = user_id,
         this.category = category,
@@ -12,12 +12,13 @@ class Job{
         this.endDate = enddate,
         this.hours_needed = hours_needed,
         this.num_volunteers = num_volunteers
+        this.address = address
     }
 
     //retrieve a job by its job_id
     static async getJobById(jobId) {
         try{
-            const response = await db.query("SELECT * FROM jobs WHERE job_id = $1", [jobId]);
+            const response = await db.query("SELECT J.*, U.address FROM jobs AS J JOIN Users AS U ON J.user_id = U.id WHERE job_id = $1", [jobId]);
             if (response.rows.length !== 1) {
                 throw new Error("Unable to locate job.");
               }
@@ -29,7 +30,7 @@ class Job{
     }
 
     static async getAllJobsOrderedByDateAsc() {
-        const response = await db.query("SELECT * FROM jobs ORDER BY start_dateTime");
+        const response = await db.query("SELECT J.*, U.address FROM jobs AS J JOIN Users AS U ON J.user_id = U.id ORDER BY start_dateTime");
         if (!response.rows.length>0) {
             throw new Error("No jobs in database")
         }
@@ -41,7 +42,7 @@ class Job{
 
     static async getPositionByOrganisationId(organisation_id) {
         try {
-          const response = await db.query("SELECT j.* FROM jobs j JOIN Users u ON j.user_id = u.id WHERE u.is_organisation = true AND u.id = $1", [organisation_id]);
+          const response = await db.query("SELECT j.*, u.address FROM jobs j JOIN Users u ON j.user_id = u.id WHERE u.is_organisation = true AND u.id = $1", [organisation_id]);
         
           if (response.rows.length === 0) {
             throw new Error("Unable to locate job.");
@@ -58,7 +59,7 @@ class Job{
     }
 
     static async getUsersJobs(user_id) {
-        const response = await db.query("SELECT J.* FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1", [user_id]);
+        const response = await db.query("SELECT J.*, U.address FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) JOIN Users AS U on (J.user_id = U.id) WHERE A.user_id = $1", [user_id]);
 
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions as of yet.")
@@ -69,21 +70,35 @@ class Job{
 
     static async getUsersJobsByDate(user_id, date) {
         //input time needs to be transformed to '23:59:59.000Z+1' such that the volunteering start time doesn't affect whether they're selected, the endtime needs to be transformed to '00:00:00.000Z+1' for the same reason
-        const response = await db.query("SELECT J.* FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1 AND J.start_datetime <= $2 AND J.enddate >= $3;", [user_id, date+' 23:59:59', date]);
+        const response = await db.query("SELECT J.*, U.address FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) JOIN Users AS U ON (J.user_id = U.id) WHERE A.user_id = $1 AND J.start_datetime <= $2 AND J.enddate >= $3;", [user_id, date+' 23:59:59', date]);
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions on this date as of yet.")
         }
         return response.rows.map(job => new Job(job))
     }
 
+    static async getContactDetailsById(id) {
+        const response = await db.query("SELECT id, name, email, phone_number, address FROM Users WHERE id = $1", [id]);
+
+        if (response.rows.length != 1) {
+            throw new Error("Unable to return organisations contact details")
+        }
+
+        return response.rows[0]
+    }
+
+
+
+
     static async createJob(data) {
         try {
-            const { title, category, start_dateTime, endDate, hours_needed, num_volunteers, user_id } = data;
-            const response = await db.query("INSERT INTO jobs (title, category, start_dateTime, endDate, hours_needed, num_volunteers, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING job_id;",
-            [title, category, start_dateTime, endDate, hours_needed, num_volunteers, user_id]
+            const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = data;
+            const response = await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",
+            [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
             );
             const job_id = response.rows[0].job_id;
-            const newJob = await Jobs.getPositionByOrganisationId(user_id);
+            const newJob = await Job.getPositionByOrganisationId(user_id);
+
             return newJob;
         } catch(error) {
         console.error("Error creating job:", error);
