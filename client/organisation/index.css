@@ -222,26 +222,12 @@ i.fa-calendar-days {
     border: 3px solid black;
     border-radius: 10px;
 }
-.job-buttons {
+.right {
     display: flex;
-    flex-direction: column;
     
 }
-.apply,
-.contact {
-    color: white;
-    font-size: 1.4rem;
-    display: flex;
+.apply {
     margin-top: 5%;
-    margin-bottom:5%;
-    margin-left: auto;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 50px;
-    width: 200px;
-    background-color: #0B3954;
-    flex-basis: 100%;
     font-family: "Quicksand", sans-serif;
     border-radius: 10px;
 }
@@ -260,7 +246,7 @@ i.fa-calendar-days {
 .middle {
     flex: 0.33;
 }
-.job-buttons {
+.right {
     flex: 0.33;
 }
 .title,

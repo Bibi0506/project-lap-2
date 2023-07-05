@@ -41,7 +41,7 @@ class Job{
 
     static async getPositionByOrganisationId(organisation_id) {
       try {
-        const response = await db.query("SELECT title, description FROM jobs j JOIN Users u ON j.user_id = u.id WHERE u.is_organisation = true AND u.id = $1", [organisation_id]);
+        const response = await db.query("SELECT j.* FROM jobs j JOIN Users u ON j.user_id = u.id WHERE u.is_organisation = true AND u.id = $1", [organisation_id]);
       
         if (response.rows.length === 0) {
           throw new Error("Unable to locate job.");
@@ -50,6 +50,12 @@ class Job{
         return response.rows.map((job) => ({
           title: job.title,
           description: job.description,
+          start_datetime: job.start_datetime,
+          enddate: job.enddate,
+          hours_needed: job.hours_needed,
+          num_volunteers: job.num_volunteers
+
+
         }));
       } catch (error) {
         console.error("Error retrieving positions from the database:", error);
