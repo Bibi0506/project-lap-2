@@ -19,8 +19,10 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
   console.log(data);
 
   if (response.status == 200) {
-    console.log("yoo");
-    window.location.assign("homepage.html");
+    localStorage.setItem("token", data.token);
+    data.is_organisation
+      ? window.location.assign("homepage.html")
+      : window.location.assign("homepage.html");
   } else {
     alert(data.error);
     console.log("naaa");
@@ -69,11 +71,10 @@ document
     const data = await response.json();
     console.log(data);
 
-    if (response.status == 200) {
+    if (response.status == 201) {
       console.log("yoo");
       window.location.assign("homepage.html");
     } else {
       alert(data.error);
-      console.log("naaa");
     }
   });
