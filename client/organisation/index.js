@@ -4,11 +4,11 @@ postForm.addEventListener("submit", postCreated);
 
 async function postCreated (e){
   e.preventDefault();
-  const data = {user_id: 1,
+  const data = {user_id: window.localStorage.token_id,
     category: document.querySelector("#jobCategory").value,
     title:document.querySelector("#jobTitle").value,
     description:document.querySelector("#jobDescription").value,
-    start_dateTime:inputDate(document.querySelector("#startDate").value),
+    start_dateTime:document.querySelector("#startDate").value,
     endDate:document.querySelector("#endDate").value,
     hours_needed:document.querySelector("#totalHours").value,
     num_volunteers:document.querySelector("#totalPositions").value
@@ -57,8 +57,8 @@ return sqlDate
 }
 
 
-async function fetchJobPost(job) {
-  const respData = await fetch(`http://localhost:3001/jobs/organisations/${job}`);
+async function fetchJobPost() {
+  const respData = await fetch(`http://localhost:3001/jobs/organisations/${window.localStorage.token_id}`);
   
   console.log(respData.ok)
   if (respData.ok) {
@@ -103,5 +103,5 @@ function addJob(jobList) {
       scroller.appendChild(jobTitle);
   })
 }
-
-console.log(fetchJobPost(5))
+fetchJobPost()
+console.log(fetchJobPost())

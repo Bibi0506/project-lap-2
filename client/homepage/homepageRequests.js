@@ -21,8 +21,8 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
   if (response.status == 200) {
     localStorage.setItem("token", data.token);
     data.is_organisation
-      ? window.location.assign("homepage.html")
-      : window.location.assign("homepage.html");
+      ? window.location.assign("../organisation/index.html")
+      : window.location.assign("../organisation/index.html");
   } else {
     alert(data.error);
     console.log("naaa");
