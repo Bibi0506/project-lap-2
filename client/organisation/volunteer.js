@@ -57,7 +57,7 @@ function checkDate(date) {
       booking.appendChild(leftDescription);
       const leftLocation = document.createElement("div");
       leftLocation.classList.add("left-location");
-      leftLocation.textContent = "Location :";
+      leftLocation.textContent = `Location :${job.address}`;
       booking.appendChild(leftLocation);
     }
   });
@@ -184,7 +184,7 @@ const populateDisplay = (arr) => {
 
     const jobLocation = document.createElement("div");
     jobLocation.classList.add("jobLocation");
-    jobLocation.textContent = `Job Location : `;
+    jobLocation.textContent = `Job Location : ${job.address} `;
     middleDiv.appendChild(jobLocation);
 
     //create and poulate buttons div
