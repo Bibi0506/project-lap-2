@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // ------------------------------------------------------------------------------ fetch Data
 const allJobsAssociatedToUser = [];
 const getAllJobs = async () => {
-  let response = await fetch(`http://localhost:3001/jobs/user/2`);
+  let response = await fetch(
+    `http://localhost:3001/jobs/user/${window.localStorage.token_id}`
+  );
   const data = await response.json();
   console.log(data);
   allJobsAssociatedToUser.push(data);
@@ -62,7 +64,6 @@ function checkDate(date) {
     }
   });
 }
-
 
 const clearJobs = () => {
   const allUsersJobs = document.querySelectorAll(".booking");
@@ -175,7 +176,9 @@ const populateDisplay = (arr) => {
 
     const dates = document.createElement("div");
     dates.classList.add("dates");
-    dates.textContent = `dates :  ${job.start_dateTime.split("T")[0]}, ${job.endDate.split("T")[0]}`;
+    dates.textContent = `dates :  ${job.start_dateTime.split("T")[0]}, ${
+      job.endDate.split("T")[0]
+    }`;
     middleDiv.appendChild(dates);
 
     const hours = document.createElement("div");
@@ -205,23 +208,22 @@ const populateDisplay = (arr) => {
     buttonsDiv.appendChild(contact);
   });
 };
-  // if (respData.ok) {
-  //   const data = await respData.json();
-  //   console.log(data)
-  // } else {
-  //   throw "error"
-  // }
-;
-
+// if (respData.ok) {
+//   const data = await respData.json();
+//   console.log(data)
+// } else {
+//   throw "error"
+// }
 const alldatasAssociatedToUser = [];
 const getAllData = async () => {
-  let response = await fetch(`http://localhost:3001/jobs/user/2`);
+  let response = await fetch(
+    `http://localhost:3001/jobs/user/${window.localStorage.token_id}`
+  );
   const data = await response.json();
   console.log(data);
   alldatasAssociatedToUser.push(data);
 };
 getAllJobs();
-
 
 respData();
 // ------------------------------------------------------------------------------ filter
@@ -266,4 +268,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
