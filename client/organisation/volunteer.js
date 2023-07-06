@@ -62,69 +62,156 @@ function checkDate(date) {
     }
   });
 }
+
+
 const clearJobs = () => {
   const allUsersJobs = document.querySelectorAll(".booking");
   allUsersJobs.forEach((entry) => {
     entry.remove();
   });
 };
+const latestStartSort = document.querySelector("#latest-start-sort");
+const resetSort = document.querySelector("#reset-sort");
+const titleAscending = document.querySelector("#title-ascending");
+const titleDescending = document.querySelector("#title-descending");
+
+titleAscending.addEventListener("click", () => {
+  const allUsersJobs = document.querySelectorAll(".jobs");
+  allUsersJobs.forEach((entry) => {
+    entry.remove();
+  });
+  let arrCopy = JSON.parse(JSON.stringify(jobsForAllUsers));
+  arrCopy[0].sort((a, b) => {
+    let fa = a.title.toLowerCase(),
+      fb = b.title.toLowerCase();
+
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  });
+  populateDisplay(arrCopy[0]);
+});
+
+titleDescending.addEventListener("click", () => {
+  const allUsersJobs = document.querySelectorAll(".jobs");
+  allUsersJobs.forEach((entry) => {
+    entry.remove();
+  });
+  let arrCopy = JSON.parse(JSON.stringify(jobsForAllUsers));
+  arrCopy[0].sort((a, b) => {
+    let fa = a.title.toLowerCase(),
+      fb = b.title.toLowerCase();
+
+    if (fa < fb) {
+      return 1;
+    }
+    if (fa > fb) {
+      return -1;
+    }
+    return 0;
+  });
+  populateDisplay(arrCopy[0]);
+});
+
+latestStartSort.addEventListener("click", () => {
+  const allUsersJobs = document.querySelectorAll(".jobs");
+  allUsersJobs.forEach((entry) => {
+    entry.remove();
+  });
+  var newarray = [...jobsForAllUsers[0]].reverse();
+  console.log(newarray);
+  populateDisplay(newarray);
+});
+
+resetSort.addEventListener("click", () => {
+  const allUsersJobs = document.querySelectorAll(".jobs");
+  allUsersJobs.forEach((entry) => {
+    entry.remove();
+  });
+  populateDisplay(jobsForAllUsers[0]);
+});
+
+const jobsForAllUsers = [];
 const respData = async () => {
   let response = await fetch(`http://localhost:3001/jobs/getall`);
   const data = await response.json();
-  //create and poulate left bottom container
-  data.forEach((job) => {
+  jobsForAllUsers.push(data);
+  console.log(jobsForAllUsers);
+  populateDisplay(jobsForAllUsers[0]);
+};
+
+const populateDisplay = (arr) => {
+  arr.forEach((job) => {
     const rightContainer = document.querySelector(".right-container");
     const jobsDiv = document.createElement("div");
     jobsDiv.classList.add("jobs");
     rightContainer.appendChild(jobsDiv);
+
     //create and poulate left div
+
     const leftDiv = document.createElement("div");
     leftDiv.classList.add("left");
     jobsDiv.appendChild(leftDiv);
+
     const title = document.createElement("div");
     title.classList.add("title");
     title.textContent = `title : ${job.title} `;
     leftDiv.appendChild(title);
+
     const description = document.createElement("div");
     description.classList.add("description");
     description.textContent = `description :  ${job.description}`;
     leftDiv.appendChild(description);
+
     //create and poulate middle div
+
     const middleDiv = document.createElement("div");
     middleDiv.classList.add("middle");
     jobsDiv.appendChild(middleDiv);
+
     const dates = document.createElement("div");
     dates.classList.add("dates");
-    dates.textContent = `dates :  ${job.start_date}, ${job.enddate}`;
+    dates.textContent = `dates :  ${job.start_dateTime.split("T")[0]}, ${job.endDate.split("T")[0]}`;
     middleDiv.appendChild(dates);
+
     const hours = document.createElement("div");
     hours.classList.add("hours");
     hours.textContent = `hours :  ${job.hours_needed}`;
     middleDiv.appendChild(hours);
+
     const jobLocation = document.createElement("div");
     jobLocation.classList.add("jobLocation");
     jobLocation.textContent = `Job Location : `;
     middleDiv.appendChild(jobLocation);
+
     //create and poulate buttons div
+
     const buttonsDiv = document.createElement("div");
     buttonsDiv.classList.add("buttons");
     jobsDiv.appendChild(buttonsDiv);
+
     const apply = document.createElement("div");
     apply.classList.add("apply");
     apply.textContent = "Apply Online";
     buttonsDiv.appendChild(apply);
+
     const contact = document.createElement("div");
     contact.classList.add("contact");
     contact.textContent = "Contact Employer";
     buttonsDiv.appendChild(contact);
   });
+};
   // if (respData.ok) {
   //   const data = await respData.json();
   //   console.log(data)
   // } else {
   //   throw "error"
   // }
-};
+;
 
 const alldatasAssociatedToUser = [];
 const getAllData = async () => {
