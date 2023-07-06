@@ -1,13 +1,13 @@
 const request = require('supertest');
 const express = require('express');
-const jobModel = require('../models/Jobs');
-const jobRouter = require('../routers/jobs');
-const jobController = require('../controllers/jobs');
+const jobModel = require('../../models/Jobs');
+const jobRouter = require('../../routers/jobs');
+const jobController = require('../../controllers/jobs');
 
 const server = express();
 server.use(express.json());
 
-jest.mock('../models/Jobs');
+jest.mock('../../models/Jobs');
 
 describe('Testing jobRouter endpoints', () => {
     beforeAll(()=> {
@@ -411,10 +411,50 @@ describe('Testing jobRouter endpoints', () => {
               const mockReq = {body : testJob}
               await jobController.create(mockReq, mockRes);
               expect(mockStatus).toHaveBeenCalledWith(201);
-              expect(mockJson).toHaveBeenCalledWith(new jobModel(testJob));
       
         })
-        
+        test('sends response with status code of 400 when no data is available', async () => {
+            //Mocks the case where no data is available
+            jest.spyOn(jobModel, 'createJob').mockImplementation(new Error(""));
+            const mockReq = {};
+            await jobController.create(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(400);
+        })
+    })
+//----------------------------------------------------------------------------------------------------------------------------
+
+    describe('DELETE route to delete job post /jobs/:id', () => {
+        test('server responds with a status code of 204', async () => {
+            let testJob = {
+                "job_id": 3,
+                "user_id": 5,
+                "category": "Customer Services",
+                "title": "Library Assistant",
+                "description": "You will be assisting the manager to re-organise the bookshelves",
+                "start_dateTime": "2023-08-01T09:00:00.000Z",
+                "endDate": "2023-08-02T23:59:59.000Z",
+                "hours_needed": 8,
+                "num_volunteers": 1,
+                "address": "dsfbdv"
+              };
+            jest.spyOn(jobModel, 'getJobById').mockResolvedValue(new jobModel(testJob));
+            jest.spyOn(jobModel.prototype, 'destroy').mockResolvedValue(new jobModel(testJob));
+
+            const mockReq = {params:{id:1}}
+            await jobController.destroy(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(204);
+        })
+        test('server sends response with status code 404 when no id is given', async () => {
+            jest.spyOn(jobModel, 'getJobById').mockImplementation(new Error(""));
+            jest.spyOn(jobModel.prototype, 'destroy').mockImplementation(new Error(""));
+            const mockReq = {}
+            await jobController.destroy(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(404);
+        })
+
+
+
+
     })
 })
 

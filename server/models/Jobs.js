@@ -88,19 +88,22 @@ class Job{
 
 
     static async createJob(data) {
-        try {
-            const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = data;
-            const response = await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",
-            [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
-            );
-            const job_id = response.rows[0].job_id;
-            const newJob = await Job.getPositionByOrganisationId(user_id);
-
-            return newJob;
-        } catch(error) {
-        console.error("Error creating job:", error);
-        throw new Error("Failed to create job. Please try again later.");
+        if (Object.keys(data).length !== 9){
+            throw new Error("Data in incorrect format")
         }
+        const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = data;
+        const response = await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",
+        [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
+        );
+
+        if (response.rows.length!==1){
+            throw new Error("Error in creating Job")
+        }
+
+        const job_id = response.rows[0].job_id;
+        const newJob = await Job.getPositionByOrganisationId(user_id);
+
+        return newJob;
     }
 
     static async getUserHours(user_id) {

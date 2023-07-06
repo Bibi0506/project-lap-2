@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.63% </span>
+                <span class="strong">3.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/55</span>
+                <span class='fraction'>2/56</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.92% </span>
+                <span class="strong">3.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/51</span>
+                <span class='fraction'>2/52</span>
             </div>
         
             
@@ -192,7 +192,10 @@
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
 <a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -284,17 +287,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -411,19 +417,22 @@ class Job{
 &nbsp;
 &nbsp;
 <span class="fstat-no" title="function not covered" >    st</span>atic async createJob(data) {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = <span class="cstat-no" title="statement not covered" >data;</span>
-            const response = <span class="cstat-no" title="statement not covered" >await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",</span>
-            [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
-            );
-            const job_id = <span class="cstat-no" title="statement not covered" >response.rows[0].job_id;</span>
-            const newJob = <span class="cstat-no" title="statement not covered" >await Job.getPositionByOrganisationId(user_id);</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            return newJob;</span>
-        } catch(error) {
-<span class="cstat-no" title="statement not covered" >        console.error("Error creating job:", error);</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error("Failed to create job. Please try again later.");</span>
+<span class="cstat-no" title="statement not covered" >        if (Object.keys(data).length !== 9){</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Data in incorrect format")</span>
         }
+        const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = <span class="cstat-no" title="statement not covered" >data;</span>
+        const response = <span class="cstat-no" title="statement not covered" >await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",</span>
+        [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
+        );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (response.rows.length!==1){</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Error in creating Job")</span>
+        }
+&nbsp;
+        const job_id = <span class="cstat-no" title="statement not covered" >response.rows[0].job_id;</span>
+        const newJob = <span class="cstat-no" title="statement not covered" >await Job.getPositionByOrganisationId(user_id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return newJob;</span>
     }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    st</span>atic async getUserHours(user_id) {
@@ -457,7 +466,7 @@ module.exports = Job;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-05T20:58:48.320Z
+                at 2023-07-06T10:34:42.165Z
             </div>
         <script src="../prettify.js"></script>
         <script>
