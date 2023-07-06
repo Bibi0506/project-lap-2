@@ -18,11 +18,20 @@
   "scripts": {
     "setup-db": "node ./db/setup.js",
     "dev": "nodemon -L ./index.js",
-    "test": "jest --watchAll",
+    "test": "jest --setupFiles ./__tests__/integration/config.js --watchAll --detectOpenHandles --runInBand --verbose",
     "start": "node ./index.js",
     "coverage": "jest --coverage",
     "test1": "jest --watch ./__tests__/unit/models.spec.js"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "/__tests__/integration/config.js"
+    ]
+ },
   "author": "",
   "license": "ISC",
   "description": "",
