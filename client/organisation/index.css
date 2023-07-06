@@ -4,15 +4,27 @@ body {
     padding: 0;
   }
   .navbar {
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     margin: 0;
-    padding: 10px;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 1550px;
+    position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .logo h1{
-      position: relative;
+  
+  @media (min-width: 1550px) {
+    .navbar {
+      padding-left: 100vw;
+      padding-right: 100vw;
+    }
+  }
+  
+  .logo h1 {
+    position: relative;
     font-weight: bold;
     font-size: 2rem;
     margin-bottom: 0%;
@@ -20,7 +32,7 @@ body {
     left: 10%;
   }
   .logo .sublogo {
-      position: relative;
+    position: relative;
     font-weight: lighter;
     font-size: 1rem;
     margin-bottom: 0%;
@@ -28,7 +40,7 @@ body {
     left: 10%;
   }
   .nav-buttons {
-      position: relative;
+    position: relative;
     display: flex;
     gap: 20px;
     right: 1%;
@@ -37,7 +49,7 @@ body {
     font-size: 1.3rem;
     padding: 5px 10px;
     border: none;
-    color: white;
+    color: black;
     text-decoration: none;
     border-radius: 5px;
   }
@@ -45,13 +57,38 @@ body {
     text-decoration: underline;
     cursor: pointer;
     transform: translateY(-3px);
-    color: #0B3954;
-    text-decoration-color: #0B3954;
+    color: #0b3954;
+    text-decoration-color: #0b3954;
   }
-
   .page {
     display:flex; 
   }
+
+  @media (max-width: 900px) {
+    .page {
+        flex-direction: column;
+    }
+  }
+  .job-box {
+    background-color: #0B3954;
+    color: white;
+    margin-left: 2%;
+    margin-right:2%;
+    width:40%;
+    height: 500px;
+    margin-top: 5%;
+    display:block;
+    padding: 10px;
+    align-items: center;
+    border-radius: 10px;
+    font-family: "Quicksand";
+  }
+
+  @media (max-width: 900px) {
+    .job-box {
+      width : 92%;
+      
+    }}
 
   .job-post{
     height: 60%;
@@ -64,35 +101,18 @@ body {
     font-family: Quicksand;
   }
 
-  .job-box {
-    background-color: #0B3954;
-    color: white;
-    margin-left: 2%;
-    margin-right:2%;
-    width:30%;
-    height: 100%;
-    margin-top: 5%;
-    display:block;
-    padding: 10px;
-    align-items: center;
-    border-radius: 10px;
-    font-family: Quicksand;
-
-  }
-
   .titles{
-  
+
+    flex: 0.5;
     align-self: flex-start;
-    width: 60%;
-    
-   
-    
+    width: 60%; 
   }
 
 
   .job-form{
+    flex: 0.5;
     align-self: flex-end;
-    width: 60%;
+    width: 80%;
     padding: 10px 15px;
     border-radius: 10px;
     
@@ -104,89 +124,29 @@ body {
   .right-side{
     flex: 0.5;
   }
-  .h1{
-    margin-top:1%;
-  }
 
+  
   #post-btn {
-    margin-left: 22%;
-    margin-bottom: 1%;
-    width: 50%;
+    margin-left: 35%;
+    width: 20%;
     padding: 10px 15px;
     border-radius: 10px;
-    display:grid;
   }
 
   #header{
     margin-left: 35%;
+    margin-top:1%;
   }
-  .grid-container {
-    margin-top: 2%;
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-}
-.left-container {
-    margin-left: 2%;
-    margin-bottom: 5%;
-    flex-direction: row;
-    width: 25%;
-}
-@media (max-width: 900px) {
-    .left-container {
-        width: 100%;
-        height: auto;
-        margin-bottom: 15%;
-    }
-}
-.top {
-    display: flex;
-    margin-bottom: 15%;
-}
-.user-icon {
-    display: flex;
-    justify-content: flex-start;
-    flex: 1;
-    color: #0B3954;
-}
-i.fa-user {
-    font-size: 2.5rem;
-}
-.name-hours {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-}
-.calendar {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 50%;
-}
-i.fa-calendar-days {
-    font-size: 10rem;
-    color: #0B3954;
-}
-.my-info,
-.booking {
-    margin-top: 18%;
-    display: flex;
-    justify-content: center;
-}
-@media (max-width: 900px) {
-    .grid-container {
-        flex-direction: column;
-    }
-}
+  
 .right-container {
     margin-top: 5%;
     border-radius: 10px;
     border: 3px solid black;
     margin-right: 2%;
     flex-direction: column;
-    width: 64%;
+    width: 60%;
     display: flex;
-    height: 792px;
+    height: 500px;
     overflow: scroll;
     font-family: "Quicksand";
 }
@@ -232,11 +192,9 @@ i.fa-calendar-days {
     font-family: "Quicksand", sans-serif;
     border-radius: 10px;
 }
-.apply:hover,
-.contact:hover {
-    opacity: 80%;
-}
+
 .dates,
+.start,
 .hours,
 .location {
     margin-top: 5%;
