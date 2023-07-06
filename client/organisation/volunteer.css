@@ -157,7 +157,7 @@ i.fa-user {
 
 .jobs {
     display: flex;
-
+    justify-content: center;
     margin-top: 5%;
     margin-bottom: 5%;
     background-color: #d9d9d9;
@@ -167,6 +167,7 @@ i.fa-user {
     border: 3px solid black;
     font-family: "Quicksand", sans-serif;
 }
+
 
 .job-buttons {
     display: flex;
@@ -178,7 +179,7 @@ i.fa-user {
     color: white;
     font-size: 1.4rem;
     display: flex;
-    margin-top: 9%;
+    margin-top: 12%;
     margin-left: auto;
     justify-content: center;
     align-items: center;
@@ -191,12 +192,12 @@ i.fa-user {
 .apply:hover,
 .contact:hover {
     opacity: 80%;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .dates,
 .hours,
-.location {
+.jobLocation {
     margin-top: 5%;
 }
 
@@ -257,6 +258,8 @@ p.import-location {
     .job-buttons {
         flex-direction: column;
     }
+
+
 }
 
 /*----------------------------------------- calendar */
@@ -273,6 +276,19 @@ p.import-location {
     justify-content: center;
     width: 100%;
     height: 50%;
+}
+
+/* ----------------------------------------booking info */
+
+
+.left-time,
+.left-title,
+.left-description,
+.left-location {
+    margin-top: 9%;
+    font-size: 1.1rem;
+
+
 }
 
 /*----------------------------------------- modal */
@@ -356,6 +372,7 @@ p.import-location {
 }
 
 .modal-container {
+    top: 0;
     height: 100%;
     width: 100%;
     z-index: 2;
@@ -382,35 +399,44 @@ p.import-location {
     padding: 40px;
     background-color: #0B3954;
 }
-.name-container,.email-container,.address-container{
 
-    font-size: 2.1rem;
+.name-container,
+.email-container,
+.address-container {
+
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
-/*----------------------------------------- modal */
+/*----------------------------------------- contact modal info*/
 
-.contact-name,.contact-email,.contact-phone-number,.contact-address{
-font-size: 2rem;
-font-family: "Quicksand", sans-serif;
-margin-top: 12%;}
+.contact-name,
+.contact-email,
+.contact-phone-number,
+.contact-address {
+    font-size: 2rem;
+    font-family: "Quicksand", sans-serif;
+    margin-top: 12%;
+}
 
 
 /*----------------------------------------- filter */
 .dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     background-color: #f1f1f1;
     border: none;
     color: black;
-  text-align: center;
+    text-align: center;
     font-size: 1rem;
     cursor: pointer;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     right: 3.8%;
@@ -418,22 +444,23 @@ margin-top: 12%;}
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
- 
-  
-  .dropdown-content p {
+}
+
+
+.dropdown-content p {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  .dropdown-content p:hover{
+}
+
+.dropdown-content p:hover {
     text-decoration: underline;
     background-color: #f1f1f1;
-  }
-  
+}
 
-  
-  .show {
+
+
+.show {
     display: block;
-  }
+}
