@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const jobController = require("../controllers/jobs");
-const {
+/*const {
   authenticatorVolunteer,
   authenticatorOrganisation,
-} = require("../middleware/authenticator");
+} = require("../middleware/authenticator");*/
 
 const jobRouter = Router();
 
@@ -24,8 +24,8 @@ jobRouter.get('/contact/:id', jobController.getOrgContactDetails);
 
 //GET route to get all position by organization_id
 jobRouter.get(
-  "/organisations/:id",/*
-  authenticatorOrganisation,*/
+  "/organisations/:id",
+/*authenticatorOrganisation,*/
   jobController.show
 );
 

@@ -1,3 +1,11 @@
+const password = document.querySelector("#password-register");
+const email = document.querySelector("#email-register");
+const name = document.querySelector("#name-register");
+const phone = document.querySelector("#phone-register");
+const address = document.querySelector("#address-register");
+const name_type = document.querySelector("#name_type");
+const passwordLog = document.querySelector("#password-login");
+const username = document.querySelector("#email-login");
 const snippet = document.querySelector(".homepage-snippet h3");
 const snippetName = document.querySelector(".homepage-snippet h1");
 
@@ -77,6 +85,15 @@ modalClose.addEventListener("click", function () {
   if (model.style.display == "block") {
     model.style.display = "none";
     body.style.overflow = "auto";
+    password.value =
+      email.value =
+      name.value =
+      phone.value =
+      address.value =
+      name_type.value =
+      passwordLog.value =
+      username.value =
+        "";
   }
 });
 
