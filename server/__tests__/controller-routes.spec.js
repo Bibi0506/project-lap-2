@@ -2,6 +2,7 @@ const request = require('supertest');
 const express = require('express');
 const jobModel = require('../models/Jobs');
 const jobRouter = require('../routers/jobs');
+const jobController = require('../controllers/jobs');
 
 const server = express();
 server.use(express.json());
@@ -13,6 +14,7 @@ describe('Testing jobRouter endpoints', () => {
         server.use('/jobs', jobRouter);
         jest.clearAllMocks();
     });
+    afterAll(() => jest.resetAllMocks());
 
     describe('GET all jobs /jobs/getall', () => {
         test('sends response with status code of 200', async () => {
@@ -74,11 +76,25 @@ describe('Testing jobRouter endpoints', () => {
 
 //----------------------------------------------------------------------------------------------------------------------------
 
-        jest.clearAllMocks();
-        describe('GET all jobs by User /jobs/user/:id', () => {
-            test('sends response with status code of 200', async () => {
-                //This mocks data being returned from the Model
-                jobModel.getUsersJobs.mockResolvedValue([{
+    jest.clearAllMocks();
+    describe('GET route to return all jobs associated with a user /jobs/user/:id', () => {
+        let applications = [
+            {
+                "application_id": 1,
+                "job_id": 1,
+                "user_id": 1
+            },
+            {
+                "application_id": 2,
+                "job_id": 1,
+                "user_id": 2
+            }
+            ];
+        
+        
+        test('server responds with status code of 200', async () => {
+            jobModel.getUsersJobs.mockResolvedValue([
+                {
                     "job_id": 1,
                     "user_id": 5,
                     "category": "Customer Services",
@@ -88,46 +104,45 @@ describe('Testing jobRouter endpoints', () => {
                     "endDate": "2023-07-02T23:59:59.000Z",
                     "hours_needed": 2,
                     "num_volunteers": 2,
-                    "address": "sdasvas"
-                }, {
-                    "job_id": 2,
-                    "user_id": 5,
-                    "category": "Customer Services",
-                    "title": "Library Assistant",
-                    "description": "You will be assisting the manager to re-organise the bookshelves",
-                    "start_dateTime": "2023-07-06T09:00:00.000Z",
-                    "endDate": "2023-07-06T23:59:59.000Z",
-                    "hours_needed": 2,
-                    "num_volunteers": 1,
-                    "address": "agadgs"
-                  }]);
-                const res = await request(server).get('/jobs/user/5');
-                expect(res.status).toBe(200);
-            })
-            test('response body has a length of 2', async () => {
+                    "address": "dsfbdv"
+                }
+                ]);
+            
                 const res = await request(server).get('/jobs/user/1');
-                expect(res.body).toHaveLength(2);
-            })
-            test('all objects in res.body have property "job_id"', async () => {
-                const res = await request(server).get('/jobs/user/1');
-                res.body.forEach(row => expect(row).toHaveProperty("job_id"))
-            })
-            test('each object in res.body has 10 properties', async () => {
-                const res = await request(server).get('/jobs/user/1');
-                res.body.forEach(row => expect(Object.keys(row).length).toBe(10))
-            })
-
-                //This clears the mocked data from the model
-            jest.clearAllMocks();
-
-            test('sends response with status code of 500 when no data is available', async () => {
-                //Mocks the case where no data is available
-                jobModel.getUsersJobs.mockImplementation(new Error("asdd"));
-                const res = await request(server).get('/jobs/users/1');
-                
-                expect(res.status).toBe(404);
-            })
+                expect(res.status).toBe(200)
         })
+        test('Number of rows in response.body is equal to the number of applications with a user_id of 1', async () => {
+
+            const res = await request(server).get('/jobs/user/1');
+
+            let num_applications = 0;
+            applications.forEach(el => el.user_id == 1? num_applications +=1 : num_applications +=0);
+            expect(res.body.length).toBe(num_applications);
+        })
+        test('response body contains 10 properties', async () => {
+
+            const res = await request(server).get('/jobs/user/1');
+
+            expect(Object.keys(res.body[0])).toHaveLength(10);
+        })
+        test('each row in response body contains address property', async () => {
+
+            const res = await request(server).get('/jobs/user/1');
+
+            expect(res.body[0]).toHaveProperty("address");
+        })
+
+        //This clears the mocked data from the model
+        jest.clearAllMocks();
+
+        test('sends response with status code of 500 when no data is available', async () => {
+            //Mocks the case where no data is available
+            jobModel.getUsersJobs.mockImplementation(new Error("asdd"));
+            const res = await request(server).get('/jobs/user/1');
+            
+            expect(res.status).toBe(404);
+        })
+    })
 //----------------------------------------------------------------------------------------------------------------------------
 
     describe('GET jobs by User and date /jobs/user/:user_id/:date', () => {
@@ -284,72 +299,122 @@ describe('Testing jobRouter endpoints', () => {
             expect(res.status).toBe(404);
         })
     })
+    
 //----------------------------------------------------------------------------------------------------------------------------
-    describe('GET route to return all jobs associated with a user /jobs/user/:id', () => {
-        let applications = [
-            {
-              "application_id": 1,
-              "job_id": 1,
-              "user_id": 1
-            },
-            {
-              "application_id": 2,
-              "job_id": 1,
-              "user_id": 2
-            }
-          ];
-        
-        
-        test('server responds with status code of 200', async () => {
-            jobModel.getUsersJobs.mockResolvedValue([
+    describe('GET route to return an organisations contact details', () => {
+        test('server responds with a status code of 200', async () => {
+            jobModel.getContactDetailsById.mockResolvedValue(
                 {
-                  "job_id": 1,
-                  "user_id": 5,
-                  "category": "Customer Services",
-                  "title": "Library Assistant",
-                  "description": "You will be assisting the manager to re-organise the bookshelves",
-                  "start_dateTime": "2023-07-01T09:00:00.000Z",
-                  "endDate": "2023-07-02T23:59:59.000Z",
-                  "hours_needed": 2,
-                  "num_volunteers": 2,
-                  "address": "dsfbdv"
-                }
-              ]);
+                    "id": 5,
+                    "name": "Library",
+                    "email": "esdfvsf@hotmail.com",
+                    "phone_number": "123546543",
+                    "address": "dsfbdv"
+                })
+            const res = await request(server).get('/jobs/contact/5');
+
+            expect(res.status).toBe(200);
+        })
+        test('response body has 5 properties', async () => {
             
-              const res = await request(server).get('/jobs/user/1');
-              expect(res.status).toBe(200)
+            const res = await request(server).get('/jobs/contact/5');
+
+            expect(Object.keys(res.body).length).toBe(5);
         })
-        test('Number of rows in response.body is equal to the number of applications with a user_id of 1', async () => {
+        test('response "id" key has value 5', async () => {
+            
+            const res = await request(server).get('/jobs/contact/5');
 
-            const res = await request(server).get('/jobs/user/1');
-
-            let num_applications = 0;
-            applications.forEach(el => el.user_id == 1? num_applications +=1 : num_applications +=0);
-            expect(res.body.length).toBe(num_applications);
+            expect(res.body.id).toBe(5);
         })
-        test('response body contains 10 properties', async () => {
-
-            const res = await request(server).get('/jobs/user/1');
-
-            expect(Object.keys(res.body[0])).toHaveLength(10);
-        })
-        test('each row in response body contains address property', async () => {
-
-            const res = await request(server).get('/jobs/user/1');
-
-            expect(res.body[0]).toHaveProperty("address");
-        })
-
         //This clears the mocked data from the model
         jest.clearAllMocks();
 
         test('sends response with status code of 500 when no data is available', async () => {
             //Mocks the case where no data is available
-            jobModel.getAllJobsOrderedByDateAsc.mockImplementation(new Error("asdd"));
-            const res = await request(server).get('/jobs/getall');
+            jobModel.getContactDetailsById.mockImplementation(new Error("asdd"));
+            const res = await request(server).get('/jobs/contact/5');
             
-            expect(res.status).toBe(500);
+            expect(res.status).toBe(404);
+        })
+    })
+    //----------------------------------------------------------------------------------------------------------------------------
+
+    describe('GET route that returns a job post from job_id /jobs/jobs/:id', () => {
+        test('server responds with 200 status code', async () => {
+            jobModel.getJobById.mockResolvedValue([{
+                "job_id": 1,
+                "user_id": 5,
+                "category": "Customer Services",
+                "title": "Library Assistant",
+                "description": "You will be assisting the manager to re-organise the bookshelves",
+                "start_dateTime": "2023-07-01T09:00:00.000Z",
+                "endDate": "2023-07-02T23:59:59.000Z",
+                "hours_needed": 2,
+                "num_volunteers": 2,
+                "address": "asdfsd"
+            }])
+
+              const res = await request(server).get('/jobs/jobs/1');
+              expect(res.status).toBe(200);
+        })
+        test('response body has length 1', async () => {
+            
+            const res = await request(server).get('/jobs/jobs/1');
+            console.log(res.body)
+            expect(res.body).toHaveLength(1);
+        })
+        test('response has 10 properties', async () => {
+            
+            const res = await request(server).get('/jobs/jobs/1');
+            expect(Object.keys(res.body[0])).toHaveLength(10);
+        })
+        test('All properties are non-null', async () => {
+            
+            const res = await request(server).get('/jobs/jobs/1');
+            Object.keys(res.body[0]).forEach(key => expect(res.body[0].key).not.toBeNull());
+        })
+        test('sends response with status code of 500 when no data is available', async () => {
+            //Mocks the case where no data is available
+            jobModel.getJobById.mockImplementation(new Error("asdd"));
+            const res = await request(server).get('/jobs/jobs/1');
+            
+            expect(res.status).toBe(404);
+        })
+    })
+
+//----------------------------------------------------------------------------------------------------------------------------
+
+
+    const mockSend = jest.fn();
+    const mockJson = jest.fn();
+    const mockStatus = jest.fn(code => ({ send: mockSend, json: mockJson, end: jest.fn() }))
+    const mockRes = { status: mockStatus }
+
+    describe('POST route to create job /jobs', () => {
+        let testJob = {
+            "job_id": 3,
+            "user_id": 5,
+            "category": "Customer Services",
+            "title": "Library Assistant",
+            "description": "You will be assisting the manager to re-organise the bookshelves",
+            "start_dateTime": "2023-08-01T09:00:00.000Z",
+            "endDate": "2023-08-02T23:59:59.000Z",
+            "hours_needed": 8,
+            "num_volunteers": 1,
+            "address": "dsfbdv"
+          };
+
+        test('server responds with a 201 status code', async () => {
+            
+              jest.spyOn(jobModel, 'createJob').mockResolvedValue(new jobModel(testJob));
+              const mockReq = {body : testJob}
+              await jobController.create(mockReq, mockRes);
+              expect(mockStatus).toHaveBeenCalledWith(201);
+              expect(mockJson).toHaveBeenCalledWith(new jobModel(testJob));
+      
         })
         
     })
 })
+

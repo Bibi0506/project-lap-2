@@ -81,7 +81,7 @@ class Job{
             throw new Error("Unable to return organisations contact details")
         }
 
-        return response.rows[0]
+        return response.rows
     }
 
 
