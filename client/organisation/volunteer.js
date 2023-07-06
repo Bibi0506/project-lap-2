@@ -247,20 +247,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   body.addEventListener("click", function (event) {
-<<<<<<< HEAD
-    console.log(event.target);
-=======
     let idNeeded = getSubstring(event.target.innerHTML, ">", "<");
->>>>>>> 963936e7116b5c796c97157a3716bdbaea0cfde2
     if (event.target.classList.contains("contact")) {
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "block";
         body.style.overflow = "hidden";
-<<<<<<< HEAD
-        getAllData(5);
-=======
         getAllData(idNeeded);
->>>>>>> 963936e7116b5c796c97157a3716bdbaea0cfde2
       } else {
         modal.style.display = "none";
         body.style.overflow = "auto";
