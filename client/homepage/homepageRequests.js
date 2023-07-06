@@ -16,17 +16,14 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
 
   const response = await fetch("http://localhost:3001/users/login", options);
   const data = await response.json();
-  console.log(data.token.user_id);
 
   if (response.status == 200) {
-    localStorage.setItem("token", {
-      id: data.token.user_id,
-      token: data.token.token,
-      isOrganisation: data.token.is_organisation,
-    });
+    localStorage.setItem("token", data.token.token);
+    localStorage.setItem("token_id", data.token.user_id);
+    localStorage.setItem("token_organisation", data.token.is_organisation);
     data.is_organisation
       ? window.location.assign("../organisation/index.html")
-      : window.location.assign("homepage.html");
+      : window.location.assign("../organisation/volunteer.html");
   } else {
     alert(data.error);
     console.log("naaa");
@@ -93,7 +90,7 @@ document
       if (response.status == 201) {
         isOrganisation
           ? window.location.assign("../organisation/index.html")
-          : window.location.assign("homepage.html");
+          : window.location.assign("../organisation/volunteer.html");
       } else {
         alert(data.error);
       }
