@@ -1,4 +1,5 @@
 //Test database environment 
+require("dotenv").config();
 const db = require ('./connect');
 
 
@@ -27,8 +28,7 @@ const createDbEnv = async () => {
         hours_needed INT NOT NULL,
         num_volunteers INT NOT NULL,
         PRIMARY KEY (job_id),
-        FOREIGN KEY (user_id) REFERENCES Users (id),
-        FOREIGN KEY (category_id) REFERENCES Categories (category_id)
+        FOREIGN KEY (user_id) REFERENCES Users (id)
       );
   
       CREATE TABLE Applications (
@@ -66,10 +66,10 @@ const createDbEnv = async () => {
     //cleaning up the test environment by dropping the "Users" table from the test database.
     const destroyDbEnv = async () => {
         await db.query(`
-        DROP TABLE IF EXISTS Users;
-        DROP TABLE IF EXISTS Tokens;
         DROP TABLE IF EXISTS Applications;
-        DROP TABLE IF EXISTS Jobs;`)
-    }
+        DROP TABLE IF EXISTS Jobs;
+        DROP TABLE IF EXISTS Tokens;
+        DROP TABLE IF EXISTS Users;`)
+    };
     
     module.exports = { createDbEnv, populateDbEnv, destroyDbEnv };

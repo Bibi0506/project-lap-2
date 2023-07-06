@@ -1,4 +1,5 @@
-const { createDbEnv, populateDbEnv, destroyDbEnv } = require('../../database/setup-test-db')
+const { createDbEnv, populateDbEnv, destroyDbEnv } = require('../../db/setup-test-db')
+const app = require('../../app');
 
 describe('users endpoints', () => {
   let api;
@@ -30,7 +31,8 @@ describe('users endpoints', () => {
 
 })
 
-/* ------------------------------------------------------------------------*/
+
+/* ------------------------------------------------------------------------
 
 describe('jobs endpoints', () => {
     let api;
@@ -61,7 +63,7 @@ describe('jobs endpoints', () => {
   
     // Add more tests for other job-related endpoints?
   });
-  /* ------------------------------------------------------------------------*/
+   ------------------------------------------------------------------------
 
   describe('tokens endpoints', () => {
     let api;
@@ -99,7 +101,7 @@ describe('jobs endpoints', () => {
   });
 
 
-  /* ------------------------------------------------------------------------*/
+ ------------------------------------------------------------------------
 
   describe('applications endpoints', () => {
     let api;
@@ -136,4 +138,4 @@ describe('jobs endpoints', () => {
   });
 
 
-
+*/
