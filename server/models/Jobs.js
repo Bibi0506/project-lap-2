@@ -48,10 +48,7 @@ class Job{
             throw new Error("Unable to locate job.");
           }
         
-          return response.rows.map((job) => ({
-            title: job.title,
-            description: job.description,
-          }));
+          return response.rows.map(row => new Job(row));
         } catch (error) {
           console.error("Error retrieving positions from the database:", error);
           throw error;
@@ -84,7 +81,7 @@ class Job{
             throw new Error("Unable to return organisations contact details")
         }
 
-        return response.rows[0]
+        return response.rows
     }
 
 
@@ -107,7 +104,7 @@ class Job{
     }
 
     static async getUserHours(user_id) {
-        const response = await db.query("SELECT SUM(J.hours_needed * (J.enddate::DATE - J.start_datetime::DATE + 1)) FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1;", [user_id]);
+        const response = await db.query('SELECT SUM(J.hours_needed * (J.enddate::DATE - J.start_datetime::DATE + 1)) AS "Hours Worked" FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1;', [user_id]);
         
         if (!response.rows[0]) {
             return 0

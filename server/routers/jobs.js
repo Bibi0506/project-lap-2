@@ -19,6 +19,9 @@ jobRouter.get("/user/:user_id", jobController.userJobs);
 //GET route to return sum of hours worked by user
 jobRouter.get("/hours/user/:user_id", jobController.getHours);
 
+//GET route to return an organisations contact details
+jobRouter.get('/contact/:id', jobController.getOrgContactDetails);
+
 //GET route to get all position by organization_id
 jobRouter.get(
   "/organisations/:id",
