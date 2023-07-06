@@ -87,21 +87,41 @@ function changeDate(inputDate) {
   
 }
 async function fetchJobPost() {
-  const respData = await fetch(
+  const response = await fetch(
     `http://localhost:3001/jobs/organisations/${window.localStorage.token_id}`
   );
-  console.log(respData.ok);
-  if (respData.ok) {
-    const data = await respData.json();
-    console.log(data);
-    // } else {
-    //   throw "error"
-    // }
-    addJob(data);
+  console.log(response);
+  if (response.status == 404) {
+    console.log("Ok");
   } else {
-    throw "Error in collecting Job";
+    const data = await repsonse.json();
+    addJob(data);
   }
 }
+
+async function checkAuth() {
+  let metadata = window.localStorage;
+  console.log(metadata);
+  const options = {
+    headers: {
+      authorisation: metadata.token,
+      is_organisation: metadata.token_organisation,
+    },
+  };
+  const response = await fetch(
+    `http://localhost:3001/applications/index`,
+    options
+  );
+  console.log(response.status);
+  if (response.status === 403) {
+    window.location.assign("../index.html");
+  } else {
+    null;
+  }
+}
+
+checkAuth();
+
 function addJob(jobList) {
   const scroller = document.querySelector(".right-container");
   const job = document.querySelector(".jobs")
@@ -167,3 +187,4 @@ function startTime(sqlDate) {
 }
 
 console.log(fetchJobPost());
+fetchJobPost();

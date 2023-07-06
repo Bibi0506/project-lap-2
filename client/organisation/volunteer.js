@@ -138,12 +138,27 @@ resetSort.addEventListener("click", () => {
 
 const jobsForAllUsers = [];
 const respData = async () => {
-  let response = await fetch(`http://localhost:3001/jobs/getall`);
-  const data = await response.json();
-  jobsForAllUsers.push(data);
-  console.log(jobsForAllUsers);
-  populateDisplay(jobsForAllUsers[0]);
+  let metadata = window.localStorage;
+
+  const options = {
+    headers: {
+      authorisation: metadata.token,
+      is_organisation: metadata.token_organisation,
+    },
+  };
+
+  let response = await fetch(`http://localhost:3001/jobs/getall`, options);
+  console.log(response.status);
+  if (response.status === 403) {
+    window.location.assign("../index.html");
+  } else {
+    const data = await response.json();
+    jobsForAllUsers.push(data);
+    console.log(jobsForAllUsers);
+    populateDisplay(jobsForAllUsers[0]);
+  }
 };
+respData();
 
 const populateDisplay = (arr) => {
   arr.forEach((job) => {
@@ -225,7 +240,6 @@ const getAllData = async () => {
 };
 getAllJobs();
 
-respData();
 // ------------------------------------------------------------------------------ filter
 function toggleDropdown() {
   var dropdownContent = document.getElementById("dropdown-content");
