@@ -308,3 +308,15 @@ const getAllData = async (id) => {
   modalContainer.appendChild(addressDiv);
 };
 getAllJobs();
+
+
+window.addEventListener("DOMContentLoaded", function () {
+  window.onclick = function (event) {
+    if (event.target.classList.contains("apply")) {
+      console.log("Apply button clicked!");
+    }
+  };
+});
+
+
+

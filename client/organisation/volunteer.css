@@ -209,10 +209,12 @@ p.import-location {
 
 .left {
   flex: 0.33;
+  margin-top: 4%;
 }
 
 .middle {
   flex: 0.33;
+  margin-top: 3%;
   margin-left: 10%;
 }
 
@@ -263,6 +265,7 @@ p.import-location {
 }
 
 /*----------------------------------------- calendar */
+
 
 #calendar {
   position: relative;
