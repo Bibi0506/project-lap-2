@@ -387,6 +387,14 @@ p.import-location {
     font-size: 2rem;
 }
 
+/*----------------------------------------- modal */
+
+.contact-name,.contact-email,.contact-phone-number,.contact-address{
+font-size: 2rem;
+font-family: "Quicksand", sans-serif;
+margin-top: 12%;}
+
+
 /*----------------------------------------- filter */
 .dropdown {
     position: relative;
