@@ -21,7 +21,7 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
     localStorage.setItem("token", data.token.token);
     localStorage.setItem("token_id", data.token.user_id);
     localStorage.setItem("token_organisation", data.token.is_organisation);
-    data.is_organisation
+    data.token.is_organisation
       ? window.location.assign("../organisation/index.html")
       : window.location.assign("../organisation/volunteer.html");
   } else {
