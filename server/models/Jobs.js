@@ -51,6 +51,7 @@ class Job{
           return response.rows.map((job) => ({
             title: job.title,
             description: job.description,
+            startDateTime:
           }));
         } catch (error) {
           console.error("Error retrieving positions from the database:", error);

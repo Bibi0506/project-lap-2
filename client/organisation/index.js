@@ -8,7 +8,7 @@ async function postCreated (e){
     category: document.querySelector("#jobCategory").value,
     title:document.querySelector("#jobTitle").value,
     description:document.querySelector("#jobDescription").value,
-    start_dateTime:document.querySelector("#startDate").value,
+    start_dateTime:inputDate(document.querySelector("#startDate").value),
     endDate:document.querySelector("#endDate").value,
     hours_needed:document.querySelector("#totalHours").value,
     num_volunteers:document.querySelector("#totalPositions").value
@@ -40,6 +40,23 @@ async function postCreated (e){
     console.log(data)
 }
 
+function changeDate(inputDate) {
+//Split date into 3 parts
+const parts = inputDate.split('/');
+//Rearrange new date object
+const dateObj =new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+
+//Get each bit for the date eg. year, month, day
+const year = dateObj.getFullYear();
+const month =String(dateObj.getMonth()+1).padStart(2, '0');
+const day =String(dateObj.getDate()).padStart(2, '0');
+
+const sqlDate =`${year}-${month}-${day}`
+
+return sqlDate
+}
+
+
 async function fetchJobPost(job) {
   const respData = await fetch(`http://localhost:3001/jobs/organisations/${job}`);
   
@@ -63,7 +80,7 @@ function addJob(jobList) {
   const scroller = document.querySelector(".right-container");
   jobList.forEach(job => {
       const {title,
-      description,start_datetime,enddate,hours_needed,num_volunteers} =job ;
+      description,start_datetime,enddate,hours_needed,num_volunteers,address} =job ;
       const jobTitle = document.createElement('div');
       jobTitle.classList.add('left');
       jobTitle.innerHTML =
@@ -75,7 +92,7 @@ function addJob(jobList) {
           <div class="middle">
               <div class="dates">Dates : ${start_datetime} - ${enddate}</div>
               <div class="hours">Hours / day : ${hours_needed}</div>
-              <div class="location">Location : </div>
+              <div class="location">Location : ${address} </div>
           </div>
           <div class="right">
               <div class="apply">Number volunteers : ${num_volunteers}</div>

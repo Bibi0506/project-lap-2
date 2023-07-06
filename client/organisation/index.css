@@ -53,6 +53,17 @@ body {
     display:flex; 
   }
 
+  .job-post form div{
+    height: 60%;
+    margin-top: 5%;
+    padding: 10px;
+    display:flex;
+    flex-wrap: column wrap;
+    align-items: center;
+    border-radius: 10px;
+    font-family: Quicksand;
+  }
+
   .job-box {
     background-color: #0B3954;
     color: white;
@@ -61,24 +72,15 @@ body {
     width:30%;
     height: 100%;
     margin-top: 5%;
-    padding: 10px;
-    display:block;
-    align-items: center;
-    border-radius: 10px;
-    font-family: Quicksand;
-
-  }
-
-  .job-post form div{
-    height: 60%;
-    margin-top: 5%;
-    padding: 10px;
     display:flex;
-    flex-wrap: row wrap;
+    padding: 10px;
     align-items: center;
     border-radius: 10px;
     font-family: Quicksand;
+
   }
+
+  
 
   .title-container,
   .job-container,
@@ -89,16 +91,19 @@ body {
   .hours-container{
     display:flex;
     flex-direction: row;
-    align-items:end;
+    align-items:center;
 
   }
 
   .titles{
+    flex:0.5;
+    align-self: left;
     
   }
 
 
   .job-form{
+    flex: 0.5;
     align-self:self-end;
     margin-left: 20%;
     width: 40%;
