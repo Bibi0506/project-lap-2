@@ -151,7 +151,7 @@ const logout = (e) => {
   } else {
     e.preventDefault();
     try {
-      window.location.assign("homepage.html");
+      window.location.assign("../homepage.html");
       localStorage.clear();
     } catch (error) {
       throw new Error("Cannot logout");
