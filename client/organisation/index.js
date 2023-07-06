@@ -1,6 +1,10 @@
-const postForm = document.querySelector("#postForm");
+const postForm = document.querySelector("#post-btn");
 const jobForm = document.getElementsByClassName("job-form");
-postForm.addEventListener("submit", postCreated);
+postForm.addEventListener(
+  "click",
+
+  postCreated
+);
 async function postCreated(e) {
   e.preventDefault();
   const data = {
@@ -22,13 +26,13 @@ async function postCreated(e) {
   };
   const response = await fetch("http://localhost:3001/jobs", options);
   if (response.status === 201) {
-    e.target.jobCategory.value = "";
-    e.target.jobTitle.value = "";
-    e.target.jobDescription.value = "";
-    e.target.startDate.value = "";
-    e.target.endDate.value = "";
-    e.target.totalHours.value = "";
-    e.target.totalPositions.value = "";
+    document.querySelector("#jobCategory").value = "";
+    document.querySelector("#jobTitle").value = "";
+    document.querySelector("#jobDescription").value = "";
+    document.querySelector("#startDate").value = "";
+    document.querySelector("#endDate").value = "";
+    document.querySelector("#totalHours").value = "";
+    document.querySelector("#totalPositions").value = "";
     console.log("Data added to the database successfully!");
   } else {
     console.error("Error adding data to the database.");
@@ -36,6 +40,7 @@ async function postCreated(e) {
   window.location.assign("./index.html");
   console.log(data);
 }
+
 function changeDate(inputDate) {
   //Split date into 3 parts
   const parts = inputDate.split("/");
@@ -48,6 +53,7 @@ function changeDate(inputDate) {
   const sqlDate = `${year}-${month}-${day}`;
   return sqlDate;
 }
+
 async function fetchJobPost() {
   const response = await fetch(
     `http://localhost:3001/jobs/organisations/${window.localStorage.token_id}`
@@ -56,7 +62,7 @@ async function fetchJobPost() {
   if (response.status == 404) {
     console.log("Ok");
   } else {
-    const data = await repsonse.json();
+    const data = await response.json();
     addJob(data);
   }
 }
@@ -71,7 +77,7 @@ async function checkAuth() {
     },
   };
   const response = await fetch(
-    `http://localhost:3001/applications/index`,
+    `http://localhost:3001/applications/id/0`,
     options
   );
   console.log(response.status);
