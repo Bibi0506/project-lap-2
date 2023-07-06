@@ -63,7 +63,6 @@ function checkDate(date) {
   });
 }
 
-
 const clearJobs = () => {
   const allUsersJobs = document.querySelectorAll(".booking");
   allUsersJobs.forEach((entry) => {
@@ -175,7 +174,9 @@ const populateDisplay = (arr) => {
 
     const dates = document.createElement("div");
     dates.classList.add("dates");
-    dates.textContent = `dates :  ${job.start_dateTime.split("T")[0]}, ${job.endDate.split("T")[0]}`;
+    dates.textContent = `dates :  ${job.start_dateTime.split("T")[0]}, ${
+      job.endDate.split("T")[0]
+    }`;
     middleDiv.appendChild(dates);
 
     const hours = document.createElement("div");
@@ -205,23 +206,30 @@ const populateDisplay = (arr) => {
     buttonsDiv.appendChild(contact);
   });
 };
-  // if (respData.ok) {
-  //   const data = await respData.json();
-  //   console.log(data)
-  // } else {
-  //   throw "error"
-  // }
-;
+// if (respData.ok) {
+//   const data = await respData.json();
+//   console.log(data)
+// } else {
+//   throw "error"
+// }
 
-const alldatasAssociatedToUser = [];
-const getAllData = async () => {
+// Function to show the  data
+const allDataAssociatedToUser = [];
+const getAllJobs = async () => {
   let response = await fetch(`http://localhost:3001/jobs/user/2`);
   const data = await response.json();
   console.log(data);
-  alldatasAssociatedToUser.push(data);
+  allDataAssociatedToUser.push(data);
 };
-getAllJobs();
+function showModalData(name, address, phone) {
+  const dataContainer = document.querySelector(".modal-centering-container");
 
+  dataContainer.innerHTML = `
+    <p><strong>Name:</strong> Name :${name}</p>
+    <p><strong>Address:</strong> Address :${address}</p>
+    <p><strong>Phone:</strong> Phone Number : ${phone}</p>
+  `;
+}
 
 respData();
 // ------------------------------------------------------------------------------ filter
@@ -266,4 +274,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
