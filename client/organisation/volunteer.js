@@ -309,14 +309,40 @@ const getAllData = async (id) => {
 };
 getAllJobs();
 
-
+//----------- get user id - should this be the auth key ?
+const getLoggedInUser = [];
+const getUserData = async (id) => {
+  let response = await fetch(`http://localhost:3001/jobs/user/2`);
+  const data = await response.json();
+  getLoggedInUser.push(data);
+  console.log(getLoggedInUser);
+};
+console.log(getUserData(getLoggedInUser));
+// ---------------------------------------------------------------click apply
 window.addEventListener("DOMContentLoaded", function () {
-  window.onclick = function (event) {
+  const jobID = (window.onclick = function (event) {
     if (event.target.classList.contains("apply")) {
       console.log("Apply button clicked!");
     }
-  };
+  });
 });
 
+// -----------------------------send post request
 
+fetch("http://localhost:3001/applications/index", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/index",
+  },
+  body: JSON.stringify(applicationData),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Application submitted:", data);
+  })
+  .catch((error) => {
+    console.error("Error submitting application:", error);
+  });
 
+// -----------------------------green dot on date of applied job
+  
