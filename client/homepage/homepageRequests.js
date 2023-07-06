@@ -21,8 +21,8 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
   if (response.status == 200) {
     localStorage.setItem("token", data.token);
     data.is_organisation
-      ? window.location.assign("homepage.html")
-      : window.location.assign("homepage.html");
+      ? window.location.assign("../organisation/index.html")
+      : window.location.assign("../organisation/volunteer.html");
   } else {
     alert(data.error);
     console.log("naaa");
@@ -88,8 +88,8 @@ document
 
       if (response.status == 201) {
         isOrganisation
-          ? window.location.assign("homepage.html")
-          : window.location.assign("homepage.html");
+          ? window.location.assign("../organisation/index.html")
+          : window.location.assign("../organisation/volunteer.html");
       } else {
         alert(data.error);
       }

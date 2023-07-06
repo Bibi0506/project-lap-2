@@ -23,20 +23,20 @@ const allJobsAssociatedToUser = [];
 const getAllJobs = async () => {
   let response = await fetch(`http://localhost:3001/jobs/user/2`);
   const data = await response.json();
-  console.log(data);
+
   allJobsAssociatedToUser.push(data);
 };
 getAllJobs();
 function checkDate(date) {
   const newDate = new Date(date).toString();
   const calendarDate = Date.parse(newDate);
+
   allJobsAssociatedToUser[0].forEach((job) => {
-    console.log(job);
     const initialTime = job.start_dateTime.split("T");
     const jobDateStart = Date.parse(initialTime[0]);
     const jobDateEnd = Date.parse(job.endDate);
+
     if (calendarDate < jobDateEnd && calendarDate >= jobDateStart) {
-      console.log("yesh");
       const leftBottom = document.querySelector(".left-bottom");
       const booking = document.createElement("div");
       booking.classList.add("booking");
@@ -122,7 +122,6 @@ latestStartSort.addEventListener("click", () => {
     entry.remove();
   });
   var newarray = [...jobsForAllUsers[0]].reverse();
-  console.log(newarray);
   populateDisplay(newarray);
 });
 
@@ -139,7 +138,6 @@ const respData = async () => {
   let response = await fetch(`http://localhost:3001/jobs/getall`);
   const data = await response.json();
   jobsForAllUsers.push(data);
-  console.log(jobsForAllUsers);
   populateDisplay(jobsForAllUsers[0]);
 };
 
@@ -202,8 +200,15 @@ const populateDisplay = (arr) => {
 
     const contact = document.createElement("div");
     contact.classList.add("contact");
-    contact.textContent = "Contact Employer";
+    contact.innerHTML =
+      'Contact Employer <span class="no-display">' + job.user_id + "</span>";
+    // contact.textContent = "Contact Employer";
     buttonsDiv.appendChild(contact);
+
+    // const user_id = document.createElement("span");
+    // user_id.classList.add("user_id");
+    // user_id.style.display = "none";
+    // user_id.textContent = `${job.user_id}`;
   });
 };
 // if (respData.ok) {
@@ -235,13 +240,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const modal = document.querySelector(".modal-container");
   const body = document.querySelector("body");
 
+  function getSubstring(str, start, end) {
+    char1 = str.indexOf(start) + 1;
+    char2 = str.lastIndexOf(end);
+    return str.substring(char1, char2);
+  }
+
   body.addEventListener("click", function (event) {
+<<<<<<< HEAD
     console.log(event.target);
+=======
+    let idNeeded = getSubstring(event.target.innerHTML, ">", "<");
+>>>>>>> 963936e7116b5c796c97157a3716bdbaea0cfde2
     if (event.target.classList.contains("contact")) {
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "block";
         body.style.overflow = "hidden";
+<<<<<<< HEAD
         getAllData(5);
+=======
+        getAllData(idNeeded);
+>>>>>>> 963936e7116b5c796c97157a3716bdbaea0cfde2
       } else {
         modal.style.display = "none";
         body.style.overflow = "auto";
@@ -254,6 +273,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (modal.style.display === "block") {
       modal.style.display = "none";
       body.style.overflow = "auto";
+      const nameDiv = document.querySelector(".contact-name");
+      const emailDiv = document.querySelector(".contact-email");
+      const phoneDiv = document.querySelector(".contact-phone-number");
+      const addressDiv = document.querySelector(".contact-address");
+      nameDiv.remove();
+      emailDiv.remove();
+      phoneDiv.remove();
+      addressDiv.remove();
     }
   });
 });
@@ -262,7 +289,6 @@ const alldatasAssociatedToUser = [];
 const getAllData = async (id) => {
   let response = await fetch(`http://localhost:3001/jobs/contact/${id}`);
   const data = await response.json();
-  console.log(data);
   alldatasAssociatedToUser.push(data);
 
   const modalContainer = document.querySelector(".modal-centering-container");
