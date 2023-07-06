@@ -1,7 +1,7 @@
 const { createDbEnv, populateDbEnv, destroyDbEnv } = require('../../db/setup-test-db')
 const app = require('../../app');
 const request = require('supertest');
-const { token } = require('morgan');
+//const { token } = require('morgan');
 
 
 describe('users endpoints', () => {

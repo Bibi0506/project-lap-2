@@ -4,6 +4,7 @@ const Job = require("../models/Jobs.js");
 async function index(req, res) {
     try {
         const jobs = await Job.getAllJobsOrderedByDateAsc();
+        console.log(jobs);
         res.status(200).send(jobs);
     } catch(err) {
         res.status(500).send({"error": err.message});
@@ -57,7 +58,6 @@ async function userJobs(req, res) {
     try {
         user_id = parseInt(req.params.user_id);
         const jobs = await Job.getUsersJobs(user_id);
-        //console.log(jobs)
         res.status(200).send(jobs);
     } catch(err) {
         res.status(404).send({"error": err.message});

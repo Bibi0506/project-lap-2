@@ -68,7 +68,7 @@ class Job{
     static async getUsersJobsByDate(user_id, date) {
         //input time needs to be transformed to '23:59:59.000Z+1' such that the volunteering start time doesn't affect whether they're selected, the endtime needs to be transformed to '00:00:00.000Z+1' for the same reason
         const response = await db.query("SELECT J.*, U.address FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) JOIN Users AS U ON (J.user_id = U.id) WHERE A.user_id = $1 AND J.start_datetime <= $2 AND J.enddate >= $3;", [user_id, date+' 23:59:59', date]);
-        console.log(response);
+
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions on this date as of yet.")
         }
