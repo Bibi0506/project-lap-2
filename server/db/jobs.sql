@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS Applications;
+DROP TABLE IF EXISTS token;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS Users;
 
@@ -6,9 +7,9 @@ CREATE TABLE Users(
     id INT GENERATED ALWAYS AS IDENTITY,
     is_organisation BOOLEAN NOT NULL,
     name VARCHAR(30) NOT NULL,
-    email VARCHAR(40) NOT NULL,
-    password VARCHAR(20) NOT NULL,
-    phone_number INT NOT NULL,
+    email VARCHAR(40) NOT NULL UNIQUE,
+    password VARCHAR(60) NOT NULL,
+    phone_number BIGINT NOT NULL,
     address VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -36,6 +37,15 @@ CREATE TABLE Applications(
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
+CREATE TABLE token(
+    token_id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    token CHAR(36) UNIQUE NOT NULL,
+    is_organisation BOOLEAN NOT NULL,
+    PRIMARY KEY (token_id),
+    FOREIGN KEY (user_id) REFERENCES Users(id)
+);
+
 INSERT INTO Users (name, is_organisation, email, password, phone_number, address)
 VALUES
 ('Oliver Thomas', false, 'ssdf@gmail.com', 'qwer', 12332, 'qweqwtg'),
@@ -51,5 +61,5 @@ VALUES
 
 INSERT INTO Applications (job_id, user_id) VALUES
 (1, 1),
-(1, 2),
-(2, 3);
+(1, 2)
+

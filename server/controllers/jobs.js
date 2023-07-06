@@ -1,4 +1,4 @@
-const Job = require("../models/Jobs");
+const Job = require("../models/Jobs.js");
 
 // GET route returning all listed jobs, ordered by start date
 async function index(req, res) {
@@ -108,8 +108,16 @@ async function getHours(req, res) {
 }
 
 
-
-
+async function getOrgContactDetails(req, res) {
+    try{
+        const id = parseInt(req.params.id);
+        const details = Job.getContactDetailsById(id);
+        res.status(200).send(details);
+    } catch(err) {
+        res.status(404).send({"error": err.message});
+    }
+}
 
 module.exports = {index, userJobs, userJobsDate, getHours,
-                    show, showJobsById, create, destroy};
+                    show, showJobsById, create, destroy,
+                getOrgContactDetails};
