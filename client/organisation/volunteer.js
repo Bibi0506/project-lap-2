@@ -213,14 +213,7 @@ const populateDisplay = (arr) => {
   // }
 ;
 
-const alldatasAssociatedToUser = [];
-const getAllData = async () => {
-  let response = await fetch(`http://localhost:3001/jobs/user/2`);
-  const data = await response.json();
-  console.log(data);
-  alldatasAssociatedToUser.push(data);
-};
-getAllJobs();
+
 
 
 respData();
@@ -247,13 +240,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.querySelector("body");
 
   body.addEventListener("click", function (event) {
+    console.log(event.target)
     if (event.target.classList.contains("contact")) {
       if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "block";
         body.style.overflow = "hidden";
+        getAllData(5)
       } else {
         modal.style.display = "none";
         body.style.overflow = "auto";
+
       }
     }
   });
@@ -266,4 +262,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+const alldatasAssociatedToUser = [];
+const getAllData = async (id) => {
+  let response = await fetch(`http://localhost:3001/jobs/contact/${id}`);
+  const data = await response.json();
+  console.log(data);
+  alldatasAssociatedToUser.push(data);
+
+
+  const modalContainer = document.querySelector(".modal-centering-container");
+   
+//create and poulate left div
+
+    const nameDiv = document.createElement("div");
+    nameDiv.classList.add("contact-name");
+    nameDiv.textContent = `Name : ${data[0].name}`;
+    modalContainer.appendChild(nameDiv);
+
+    const emailDiv = document.createElement("div");
+    emailDiv.classList.add("contact-email");
+    emailDiv.textContent = `E-mail : ${data[0].email}`;
+    modalContainer.appendChild(emailDiv);
+
+    const phoneDiv = document.createElement("div");
+    phoneDiv.classList.add("contact-phone-number");
+    phoneDiv.textContent = `Phone Number : ${data[0].phone_number}`;
+    modalContainer.appendChild(phoneDiv);
+
+    const addressDiv = document.createElement("div");
+    addressDiv.classList.add("contact-address");
+    addressDiv.textContent = `Address : ${data[0].address}`;
+    modalContainer.appendChild(addressDiv);
+};
+getAllJobs();
 
