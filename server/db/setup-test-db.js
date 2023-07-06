@@ -43,7 +43,7 @@ const createDbEnv = async () => {
       CREATE TABLE token (
         token_id INT GENERATED ALWAYS AS IDENTITY,
         user_id INT NOT NULL,
-        token CHAR(36) UNIQUE NOT NULL,
+        token CHAR(6) UNIQUE NOT NULL,
         is_organisation BOOLEAN NOT NULL,
         PRIMARY KEY (token_id),
         FOREIGN KEY (user_id) REFERENCES Users (id)
@@ -59,7 +59,7 @@ const createDbEnv = async () => {
 
         await db.query("INSERT INTO Applications (job_id, user_id) VALUES (1, 1)");
       
-        await db.query("INSERT INTO token (user_id, token, is_organisation) VALUES (1, 'token123', FALSE)");
+        await db.query("INSERT INTO token (user_id, token, is_organisation) VALUES (1, 'tok123', FALSE)");
       }; 
     
     
