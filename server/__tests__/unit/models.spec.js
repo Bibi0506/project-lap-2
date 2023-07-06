@@ -28,7 +28,7 @@ test_data = [
     }
   ];
 
-  describe('Testing Job Model in /models/Jobs.js', () => {
+describe('Testing Job Model in /models/Jobs.js', () => {
     beforeEach(() => jest.clearAllMocks());
 
     afterAll(() => jest.resetAllMocks());
@@ -60,13 +60,20 @@ test_data = [
         })
         test('Method throws error if db returns no data', async () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({rows:[]});
-
-            expect(await jobModel.getAllJobsOrderedByDateAsc()).toThrowError();
+            /*const data = await jobModel.getAllJobsOrderedByDateAsc();
+            console.log("banana", data)
+            expect(() => data).toThrow(TypeError)*/
+            await expect(jobModel.getAllJobsOrderedByDateAsc()).rejects.toThrowError("No jobs in database");
             
         })
-
-
-
-
     })
-  })
+//----------------------------------------------------------------------------------------------------------------------------------
+    describe('Testing getJobById method', () => {
+        test('Method returns an object', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows: [test_data[0]]});
+            data = await jobModel.getJobById(1);
+            console.log(data)
+            expect(data).toBeInstanceOf(jobModel);
+        })
+    })
+})

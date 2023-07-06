@@ -20,9 +20,19 @@
     "dev": "nodemon -L ./index.js",
     "test": "jest --watchAll",
     "start": "node ./index.js",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "test1": "jest --watch ./__tests__/unit/models.spec.js"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "/__tests__/integration/config.js"
+    ]
+ }
 }
