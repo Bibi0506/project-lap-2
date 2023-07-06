@@ -58,12 +58,12 @@ INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate
 VALUES
 (5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-01T09:00:00.000Z', '2023-07-02T23:59:59.000Z', 2, 2),
 (5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1),
-(2, 'Gardener', 'Gardener Assistant', 'Trim trees and plant seeds', '2023-07-03T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1);
+(2, 'Gardener', 'Gardener Assistant', 'Trim trees and plant seeds', '2023-07-03T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1),
 (2, 'Gardener', 'Hedge Trimmer', 'Cut things', '2023-06-06T09:00:00.000Z', '2023-06-06T23:59:59.000Z', 2, 1),
-(3, 'Litter picker', 'Litter picker' 'Pick up trash from around hospital', '2023-07-01T09:00:00.000Z', '2023-07-03T23:59:59.000Z', 2, 1),
+(3, 'Litter picker', 'Litter picker', 'Pick up trash from around hospital', '2023-07-01T09:00:00.000Z', '2023-07-03T23:59:59.000Z', 2, 1),
 (3, 'Litter picker', 'Litter picker' 'Pick up trash from around sports centre.', '2023-07-01T09:00:00.000Z', '2023-07-03T23:59:59.000Z', 2, 1),
-(4, 'Food Service', 'Server', 'Help at the local food bank serving food.', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1);
-(4, 'Drink Service', 'Server', 'Help at the local food bank serving drinks.', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1);
+(4, 'Food Service', 'Server', 'Help at the local food bank serving food.', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1),
+(4, 'Drink Service', 'Server', 'Help at the local food bank serving drinks.', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1),
 (5, 'Customer Services', 'Library Assistant', 'You will be assisting the manager to re-organise the bookshelves', '2023-07-06T09:00:00.000Z', '2023-07-06T23:59:59.000Z', 2, 1);
 
 
