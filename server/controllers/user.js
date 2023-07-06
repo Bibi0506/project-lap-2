@@ -32,7 +32,7 @@ async function login (req, res) {
             throw new Error("Incorrect credentials.");
         } else { //create a new token spec. associated with the user 
             const token = await Token.create(user.id, user.is_organisation);
-            res.status(200).json({ authenticated: true, token: token.token });
+            res.status(200).json({ authenticated: true, token });
         }
         
     } catch (err) {
