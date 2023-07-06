@@ -20,7 +20,7 @@ async function authenticatorVolunteer(req, res, next) {
 
 async function authenticatorOrganisation(req, res, next) {
     try {//check (headers) that the token is valid
-        const userToken = req.headers["authorization"];
+        const userToken = req.headers["authorisation"];
         const is_organisation = req.headers["is_organisation"];
 
         if (userToken == "null" || is_organisation === false) {

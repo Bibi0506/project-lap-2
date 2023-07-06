@@ -55,6 +55,8 @@ const createDbEnv = async () => {
     const populateDbEnv = async () => {
         await db.query("INSERT INTO Users  (name, is_organisation, email, password, phone_number, address) VALUES ('Mike', FALSE, 'mike@gmail.com', 'hello', 12345, '12 Walton rd')");
         
+        await db.query("INSERT INTO Users  (name, is_organisation, email, password, phone_number, address) VALUES ('Library', TRUE, 'library@gmail.com', 'hello', 12345, '1 Ave')");
+
         await db.query("INSERT INTO jobs (user_id, category_id, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES (1, 1, 'Job 1', 'Description 1', '2023-07-01T09:00:00.000Z', '2023-07-02T23:59:59.000Z', 2, 2)");
 
         await db.query("INSERT INTO Applications (job_id, user_id) VALUES (1, 1)");
