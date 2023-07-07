@@ -32,12 +32,16 @@ Key features of the website include:
 
 # Known Bugs
 - If a user has more than one volunteering position on a given day, the calendar will display these positions in a way that is inconsistent with the rest of the page.
+- Calendar and sign ups are temperamental.
+- When a user logs out they are taken to the jobs page and then to the home page.
+- Unity home button isn't found.
 
 # Planned Improvements
-- List the Applicants for each job
-- Filter system for jobs
-- Delete job button
-- Email Verification
+- Calendar highlights the days a user has a job booked.
+- List the Applicants for each job.
+- Filter system for jobs.
+- Delete job button.
+- Email Verification.
 
 # Contributors
 - Alex Earle
