@@ -29,166 +29,57 @@
     </div>
     <div class="page">
     <div class=" job-box">
+        <h1 id="header">Add Job</h1>
         <form class ="job-post" id="postForm">
-            <h1 id="header">Add Job</h1>
-            <div class="job-container">
-            <label class= "titles" > Job Category
-            </label> 
-            <input class="job-form" id= "jobCategory" type="text" > 
-            <br>
+            
+            <div class= "left-side"> 
+                <label class= "titles" > Job Category :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" >Job Title :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" >Job Description :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" ></label>Start Date :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" > End Date :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" ></label>Start Time :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" ></label>Total hours per day :
+                </label>
+                <br>
+                <br>
+                <label class= "titles" ></label>Total positions :
+                </label>
             </div>
-
-            <div class ="titles-container">
-            <label class= "titles" >Job Title  
-            </label>
-            <input class="job-form" id= "jobTitle" type="text" >
-            <br>
+            <div class="right-side">
+                <input class="job-form" id= "jobCategory" type="text" > 
+                <input class="job-form" id= "jobTitle" type="text" >
+                <input class="job-form" id = "jobDescription" type="text" >
+                <input class="job-form" id = "startDate" type="text" >
+                <input class="job-form" id= "endDate" type="text" >
+                <input class="job-form" id = "startTime" type="text" >
+                <input class="job-form" id= "totalHours" type="text" >
+                <input class="job-form" id= "totalPositions" type="text" >
             </div>
-
-            <div class ="description-container">
-            <label class= "titles" >Job Description
-            </label>
-            <input class="job-form" id = "jobDescription" type="text" >
-            <br>
-            </div>
-
-            <div class ="start-container">
-            <label class= "titles" ></label>Start Date
-            </label>
-            <input class="job-form" id = "startDate" type="text" >
-            <br>
-            </div>
-
-            <div class ="end-container">
-            <label class= "titles" > End Date
-            </label>
-            <input class="job-form" id= "endDate" type="text" >
-            <br>
-            </div>
-
-            <div class ="time-container">
-            <label class= "titles" ></label>Start Time
-            </label>
-            <input class="job-form" id = "startTime" type="text" >
-            <br>
-            </div>
-
-            <div class ="hours-container">
-            <label class= "titles" ></label>Total hours per day
-            </label>
-            <input class="job-form" id= "totalHours" type="text" >
-            <br>
-            </div>
-
-            <div class ="titles-container">
-            <label class= "titles" ></label>Total positions
-            </label>
-            <input class="job-form" id= "totalPositions" type="text" >
-            <br>
-            </div>
-
-            <br>
-            <input type = "submit" value = "Post" id ="post-btn">
         </form>
-        <p id="message"></p>
+        <input type = "submit" value = "Post" id ="post-btn">
     </div>
     <div class="right-container">
         <div class="filter-by"><i class="fa-solid fa-filter"></i></div>
-        <!-- <div class="jobs">
-            <div class="left">
-                <div class="title">Job Title :</div>
-                <div class="description">Job Description :150 words</div>
-            </div>
-            <div class="middle">
-                <div class="dates">Dates :</div>
-                <div class="hours">Hours / day :</div>
-                <div class="location">Location :</div>
-            </div>
-            <div class="job-buttons">
-                <div class="apply">apply online</div>
-                <div class="contact">contact employer</div>
-            </div>
-        </div>
-        <div class="jobs">
-            <div class="left">
-                <div class="title">Job Title :</div>
-                <div class="description">Job Description :</div>
-            </div>
-            <div class="middle">
-                <div class="dates">Dates :</div>
-                <div class="hours">Hours / day :</div>
-                <div class="location">Location :</div>
-            </div>
-            <div class="job-buttons">
-                <div class="apply">apply online</div>
-                <div class="contact">contact employer</div>
-            </div>
-        </div>
-        
-        <div class="jobs">
-            <div class="left">
-                <div class="title">Job Title :</div>
-                <div class="description">
-                    Job Description :<br />
-                    Lorem Ipsum is simply dummy text of the printing and typesetting
-                    industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged. It was
-                    popularised in the 1960s with the release of Letraset sheets
-                    containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus PageMaker including versions of
-                    Lorem Ipsum.
-                </div>
-            </div>
-            <div class="middle">
-                <div class="dates">Dates : <br />17/01/2023 - 20/01/2023</div>
-                <div class="hours">
-                    Hours / day :<br />
-                    5
-                </div>
-                <div class="location">
-                    Location :<br />
-                    Buckingham palace
-                </div>
-            </div>
-            <div class="job-buttons">
-                <div class="apply">apply online</div>
-                <div class="contact">contact employer</div>
-            </div>
-        </div>
-        <div class="jobs">
-            <div class="left">
-                <div class="title">Job Title :</div>
-                <div class="description">Job Description :</div>
-            </div>
-            <div class="middle">
-                <div class="dates">Dates :</div>
-                <div class="hours">Hours / day :</div>
-                <div class="location">Location :</div>
-            </div>
-            <div class="job-buttons">
-                <div class="apply">apply online</div>
-                <div class="contact">contact employer</div>
-            </div>
-        </div>
-        <div class="jobs">
-            <div class="left">
-                <div class="title">Job Title :</div>
-                <div class="description">Job Description :</div>
-            </div>
-            <div class="middle">
-                <div class="dates">Dates :</div>
-                <div class="hours">Hours / day :</div>
-                <div class="location">Location :</div>
-            </div>
-            <div class="job-buttons">
-                <div class="apply">apply online</div>
-                <div class="contact">contact employer</div>
-            </div>
-        </div>
-    </div> -->
+
     </div>
     
 </body>
