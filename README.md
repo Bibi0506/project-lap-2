@@ -10,12 +10,6 @@ Key features of the website include:
 - Displays all available jobs to the volunteer and allows them to register their interest
 - Calendar displaying all upcoming jobs for a volunteer
 
-<!-- Our main objectives with this project are:
-- Ignite interest and curiosity in non-STEM subjects among children
-- Foster a positive learning environment through gamification
-- Encourage children to explore and pursue non-STEM-related opportunities
-- Please note that this project is an ongoing effort, and we welcome contributions from educators, parents, and developers to enhance the game's content and features. Together,
-- we can inspire the next generation of innovators. -->
 # To Install for Development
 1. Copy the SSH key on the GitHub Repo.
 2. Open your terminal and navigate to the desired directory using the command `cd <write file path here>`.
@@ -33,29 +27,21 @@ Key features of the website include:
 10. Run the commands `cd server` & `npm run dev` in the terminal.
 11. Open the project using live server from the `index.html` file located inside the client and homepage directories.
 
+# Running the App From the Browser
+- If you do not want to develop the app further but would like to see it in action, there is a hosted version available from the following URL `https://project-council-site.onrender.com/`
 
+# Known Bugs
+- If a user has more than one volunteering position on a given day, the calendar will display these positions in a way that is inconsistent with the rest of the page.
 
-# How to run the game
-1. Within the server folder, run: `npm run dev`
-2. Go to 'http://localhost:3000'
-# API
-- The api can be found at 'http://localhost:3000/api'. Here you can visit these links
-1. **api/questions** to see a list of all the available questions
-2. **api/slytherin** to receive 10 random questions from the Art category in JSON format
-3. **api/gryffindor** to receive 10 random questions from the English category in JSON format
-4. **api/ravenclaw** to receive 10 random questions from the Music category in JSON format
-5. **api/hufflepuff** to receive 10 random questions from the Drama category in JSON format
-# Features
-- Footer and header change colors when hovering over a subject/house
-- the quiz pages gives multiple chances so its enjoyable for every age group
-- broomstick tracking you constant score
-- a flippable card that gives you more information about the questions
-# Contributers
-The current Contributers are
+# Planned Improvements
+- List the Applicants for each job
+- Filter system for jobs
+- Delete job button
+- Email Verification
+
+# Contributors
 - Alex Earle
-- Abbie Wills
-- Yaasif Mohammed
-- Shanthi sree Addanki
-We are planning on letting others contribute on the project like teachers, parents and developers in the near future
-```
-```
+- Dan Scott
+- Roberta Capuano
+- Sabrina Wright
+- Oliver Thomas
