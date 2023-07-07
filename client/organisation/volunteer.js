@@ -368,6 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
         createApplication(jobIdNeeded);
         event.target.style.backgroundColor = "green";
         event.target.textContent = "Applied";
+        window.location.assign("./volunteer.html");
       }
     }
   });
