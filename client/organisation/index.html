@@ -6,76 +6,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = index.css>
     <script defer src ="index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
 </head>
 <body>
     <div class="navbar">
         <div class="logo">
-            <h1>Unity</h1>
-            <p class="sublogo">Post.Volenteer.Connect</p>
+          <h1><a href="./homepage.html">Unity</a></h1>
+          <p class="sublogo">Post.Volunteer.Connect</p>
         </div>
         <div class="nav-buttons">
-            <h1 class="nav-button" id="about-unity">About Unity</h1>
-            <h1 class="nav-button" id="post-job">Post a Job</h1>
-            <h1 class="nav-button">Volunteer</h1>
+          <h1 class="nav-button" id="about-unity">About Unity</h1>
+          <h1 class="nav-button" id="post-job">Log in</h1>
         </div>
         <div class="icon center" alt="options symbol">
-            <span class="referenceForNav"></span>
-            <span class="referenceForNav"></span>
-            <span class="referenceForNav"></span>
-          </div>
+          <span class="referenceForNav"></span>
+          <span class="referenceForNav"></span>
+          <span class="referenceForNav"></span>
         </div>
-        <div class="dropdown_menu" id="dropdown-menu">
-    </div>
+      </div>
+      <div class="dropdown_menu" id="dropdown-menu">
+        <a class="navbar-els">About Unity</a>
+        <a class="navbar-els" id="post-job-two">Log in</a>
+      </div>
     <div class="page">
     <div class=" job-box">
         <h1 id="header">Add Job</h1>
-        <form class ="job-post" id="postForm">
-            
-            <div class= "left-side"> 
-                <label class= "titles" > Job Category :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" >Job Title :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" >Job Description :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" ></label>Start Date :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" > End Date :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" ></label>Start Time :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" ></label>Total hours per day :
-                </label>
-                <br>
-                <br>
-                <label class= "titles" ></label>Total positions :
-                </label>
+        <form id="postForm">
+            <div class="job-post">
+                <div class= "left-side"> 
+                    <label class= "titles" > Job Category :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" >Job Title :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" >Job Description :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" ></label>Start Date :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" > End Date :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" ></label>Start Time :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" ></label>Total hours per day :
+                    </label>
+                    <br>
+                    <br>
+                    <label class= "titles" ></label>Total positions :
+                    </label>
+                </div>
+                <div class="right-side">
+                    <input class="job-form" id= "jobCategory" type="text" placeholder="eg. Grounds keeping"> 
+                    <input class="job-form" id= "jobTitle" type="text" placeholder ="eg. Gardener">
+                    <input class="job-form" id = "jobDescription" type="text" placeholder ="eg. Water plants" >
+                    <input class="job-form" id = "startDate" type="text" placeholder="eg. 01/01/2023">
+                    <input class="job-form" id= "endDate" type="text" placeholder="eg. 01/01/2023">
+                    <input class="job-form" id = "startTime" type="text" placeholder ="eg. 07:00">
+                    <input class="job-form" id= "totalHours" type="text" placeholder ="eg. 4">
+                    <input class="job-form" id= "totalPositions" type="text" placeholder = "eg. 2">
+                </div>
             </div>
-            <div class="right-side">
-                <input class="job-form" id= "jobCategory" type="text" > 
-                <input class="job-form" id= "jobTitle" type="text" >
-                <input class="job-form" id = "jobDescription" type="text" >
-                <input class="job-form" id = "startDate" type="text" >
-                <input class="job-form" id= "endDate" type="text" >
-                <input class="job-form" id = "startTime" type="text" >
-                <input class="job-form" id= "totalHours" type="text" >
-                <input class="job-form" id= "totalPositions" type="text" >
-            </div>
+            <br>
+
+            <input type = "submit" value = "Post" id ="post-btn">
         </form>
-        <input type = "submit" value = "Post" id ="post-btn">
+        
     </div>
     <div class="right-container">
         <div class="filter-by"><i class="fa-solid fa-filter"></i></div>

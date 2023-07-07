@@ -160,3 +160,63 @@ function addJob(jobList) {
   });
 }
 fetchJobPost();
+
+const logInButton = document.querySelector("#post-job");
+const logInButtonTwo = document.querySelector("#post-job-two");
+const logout = (e) => {
+  if (e.target.textContent === "Log In") {
+    if (model.style.display === "none" || model.style.display === "") {
+      model.style.display = "block";
+      body.style.overflow = "hidden";
+    } else {
+      model.style.display = "none";
+      body.style.overflow = "auto";
+    }
+    if (nameType.innerHTML.includes("Business Name :")) {
+      nameType.innerHTML = nameType.innerHTML.replace(
+        "Business Name :",
+        "Name :"
+      );
+    }
+  } else {
+    e.preventDefault();
+    try {
+      window.location.assign("./index.html");
+      localStorage.clear();
+    } catch (error) {
+      throw new Error("Cannot logout");
+    }
+  }
+};
+logInButton.addEventListener("click", logout);
+logInButtonTwo.addEventListener("click", logout);
+if (!window.localStorage.token) {
+  logInButton.textContent = "Log In";
+  logInButtonTwo.textContent = "Log In";
+} else {
+  logInButton.textContent = "Log Out";
+  logInButtonTwo.textContent = "Log Out";
+}
+
+const dropdown = document.querySelector(".dropdown_menu");
+const icons = document.querySelectorAll(".icon");
+const icon = document.querySelector(".icon");
+const body = document.querySelector("body");
+icons.forEach((icon) => {
+  icon.addEventListener("click", (event) => {
+    icon.classList.toggle("open");
+    dropdown.classList.toggle("openDrop");
+  });
+});
+body.addEventListener("click", (e) => {
+  if (
+    e.target.classList.contains("center") ||
+    e.target.classList.contains("referenceForNav") ||
+    e.target.classList.contains("dropdown_menu")
+  ) {
+    null;
+  } else if (dropdown.classList.contains("openDrop")) {
+    dropdown.classList.remove("openDrop");
+    icon.classList.toggle("open");
+  }
+});
