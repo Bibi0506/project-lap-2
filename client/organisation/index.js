@@ -1,29 +1,22 @@
-const postForm = document.querySelector("#postForm");
+const postForm = document.querySelector("#post-btn");
 const jobForm = document.getElementsByClassName("job-form");
-postForm.addEventListener("submit", postCreated);
+postForm.addEventListener(
+  "click",
 
-
-
+  postCreated
+);
 async function postCreated(e) {
   e.preventDefault();
-  const startDate =document.querySelector("#startDate").value;
-  console.log(startDate)
-  const startTime =document.querySelector("#startTime").value;
-  console.log(startTime)
-  const startDateTime = changeDateTime(startDate,startTime)
-  const inputDate =document.querySelector("#endDate").value
-  const end_date = new Date(changeDate(inputDate))
   const data = {
     user_id: window.localStorage.token_id,
     category: document.querySelector("#jobCategory").value,
     title: document.querySelector("#jobTitle").value,
     description: document.querySelector("#jobDescription").value,
-    start_dateTime: startDateTime,
-    endDate: end_date,
+    start_dateTime: document.querySelector("#startDate").value,
+    endDate: document.querySelector("#endDate").value,
     hours_needed: document.querySelector("#totalHours").value,
-    num_volunteers: document.querySelector("#totalPositions").value
+    num_volunteers: document.querySelector("#totalPositions").value,
   };
-  console.log(data.start_dateTime)
   const options = {
     method: "POST",
     headers: {
@@ -31,77 +24,51 @@ async function postCreated(e) {
     },
     body: JSON.stringify(data),
   };
-
-
   const response = await fetch("http://localhost:3001/jobs", options);
   if (response.status === 201) {
-    e.target.jobCategory.value = "";
-    e.target.jobTitle.value = "";
-    e.target.jobDescription.value = "";
-    e.target.startDate.value = "";
-    e.target.endDate.value = "";
-    e.target.startTime.value = "";
-    e.target.totalHours.value = "";
-    e.target.totalPositions.value = "";
+    document.querySelector("#jobCategory").value = "";
+    document.querySelector("#jobTitle").value = "";
+    document.querySelector("#jobDescription").value = "";
+    document.querySelector("#startDate").value = "";
+    document.querySelector("#endDate").value = "";
+    document.querySelector("#totalHours").value = "";
+    document.querySelector("#totalPositions").value = "";
     console.log("Data added to the database successfully!");
   } else {
     console.error("Error adding data to the database.");
   }
   window.location.assign("./index.html");
-  console.log(data);
-}
-function changeDateTime(inputDate,startTime) {
-  //Split date into parts
-  const dateParts = inputDate.split("/");
-  const timeParts = startTime.split(':');
-
-  //Rearrange new date object
-  const dateObj = new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1]);
-  //Get each bit for the date eg. year, month, day
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  const hours = String(dateObj.getHours()).padStart(2, '0');
-  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-
-// Format the date and time in the SQL date format (YYYY-MM-DD HH:MM:SS)
-const sqlDateTime = `${year}-${month}-${day}T${hours}:${minutes}:00.000Z`;
-
-return sqlDateTime
 }
 
 function changeDate(inputDate) {
   //Split date into 3 parts
-  const parts = inputDate.split('/');
+  const parts = inputDate.split("/");
+  console.log(parts);
   //Rearrange new date object
-  const dateObj =new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
-  
+  const dateObj = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
   //Get each bit for the date eg. year, month, day
   const year = dateObj.getFullYear();
-  const month =String(dateObj.getMonth()+1).padStart(2, '0');
-  const day =String(dateObj.getDate()).padStart(2, '0');
-  
-  const sqlDate =`${year}-${month}-${day}T00:00:00.000Z`
-
-  return sqlDate
-  
+  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getDate()).padStart(2, "0");
+  const sqlDate = `${year}-${month}-${day}`;
+  return sqlDate;
 }
+
 async function fetchJobPost() {
   const response = await fetch(
     `http://localhost:3001/jobs/organisations/${window.localStorage.token_id}`
   );
-  console.log(response);
   if (response.status == 404) {
     console.log("Ok");
   } else {
-    const data = await repsonse.json();
+    const data = await response.json();
     addJob(data);
   }
 }
 
 async function checkAuth() {
   let metadata = window.localStorage;
-  console.log(metadata);
+
   const options = {
     headers: {
       authorisation: metadata.token,
@@ -109,7 +76,7 @@ async function checkAuth() {
     },
   };
   const response = await fetch(
-    `http://localhost:3001/applications/index`,
+    `http://localhost:3001/applications/id/0`,
     options
   );
   console.log(response.status);
@@ -124,34 +91,64 @@ checkAuth();
 
 function addJob(jobList) {
   const scroller = document.querySelector(".right-container");
-  const job = document.querySelector(".jobs")
-  const message =document.querySelector(".message")
   jobList.forEach((job) => {
-      const {
-        job_id,
-        is_organisation,
-        category,
-        title,
-        description,
-        start_dateTime,
-        endDate,
-        hours_needed,
-        num_volunteers,
-        address
-      } = job;
-      const startDate =sortDates(start_dateTime);
-      const lastDate = sortDates(endDate);
-      const time = startTime(start_dateTime);
-      const jobTitle = document.createElement("div");
-      jobTitle.classList.add("left");
-      jobTitle.innerHTML = `<div class="jobs">
+    const {
+      title,
+      description,
+      start_dateTime,
+      endDate,
+      hours_needed,
+      num_volunteers,
+      address,
+    } = job;
+
+    const newStart = new Date(start_dateTime);
+    const newEnd = new Date(endDate);
+
+    let startDay = newStart.getDate();
+    let startMonth = newStart.getMonth();
+    let startYear = newStart.getFullYear();
+    let startHour = newStart.getHours();
+    let startMinutes = newStart.getMinutes();
+    let meridianStart = "AM";
+    if (startMinutes === 0) {
+      startMinutes = "00";
+    }
+    if (startHour > 12) {
+      startHour -= 12;
+      meridianStart = "PM";
+    }
+
+    let endDay = newEnd.getDate();
+    let endMonth = newEnd.getMonth();
+    let endYear = newEnd.getFullYear();
+    let endHour = newEnd.getHours();
+    let endMinutes = newEnd.getMinutes();
+    let meridianEnd = "AM";
+    if (endMinutes === 0) {
+      endMinutes = "00";
+    }
+    if (endHour > 12) {
+      endHour -= 12;
+      meridianEnd = "PM";
+    }
+
+    let completeNewStart = `${startDay}/${
+      startMonth + 1
+    }/${startYear} - ${startHour}:${startMinutes}${meridianStart}`;
+    let completeNewEnd = `${endDay}/${
+      endMonth + 1
+    }/${endYear} - ${endHour}:${endMinutes}${meridianEnd}`;
+
+    const jobTitle = document.createElement("div");
+    jobTitle.classList.add("left");
+    jobTitle.innerHTML = `<div class="jobs">
           <div class="left">
               <div class="title">Job Title : ${title}</div>
               <div class="description">Job Description : ${description}</div>
           </div>
           <div class="middle">
-              <div class="dates">Dates : ${startDate} - ${lastDate}</div>
-              <div class="start">Start Time: ${time} </div>
+              <div class="dates">Dates : ${completeNewStart} to ${completeNewEnd}</div>
               <div class="hours">Hours / day : ${hours_needed}</div>
               <div class="location">Location : ${address} </div>
           </div>
@@ -160,31 +157,6 @@ function addJob(jobList) {
           </div>
       </div>`;
     scroller.appendChild(jobTitle);
-    
-  })
-};
-
-function sortDates(sqlDate){
-
-const dateObj = new Date(sqlDate);
-
-const year = dateObj.getFullYear();
-const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-const day = String(dateObj.getDate()).padStart(2, '0');
-
-const formattedDate = `${day}/${month}/${year}`;
-
-return(formattedDate)
+  });
 }
-
-function startTime(sqlDate) {
-  const dateObj = new Date(sqlDate);
-  const hours = String(dateObj.getUTCHours()).padStart(2, '0');
-  const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');
-
-  const formattedTime = `${hours}:${minutes}`;
-  return(formattedTime);
-}
-
-console.log(fetchJobPost());
 fetchJobPost();
