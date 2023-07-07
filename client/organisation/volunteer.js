@@ -43,9 +43,41 @@ function checkDate(date) {
       leftBottom.appendChild(booking);
       const leftTime = document.createElement("div");
       leftTime.classList.add("left-time");
-      leftTime.textContent = `Time : ${new Date(
-        job.start_dateTime
-      )} - ${new Date(job.endDate)}`;
+      const newStart = new Date(job.start_dateTime);
+      const newEnd = new Date(job.endDate);
+      let startDay = newStart.getDate();
+      let startMonth = newStart.getMonth();
+      let startYear = newStart.getFullYear();
+      let startHour = newStart.getHours();
+      let startMinutes = newStart.getMinutes();
+      let meridianStart = "AM";
+      if (startMinutes === 0) {
+        startMinutes = "00";
+      }
+      if (startHour > 12) {
+        startHour -= 12;
+        meridianStart = "PM";
+      }
+      let endDay = newEnd.getDate();
+      let endMonth = newEnd.getMonth();
+      let endYear = newEnd.getFullYear();
+      let endHour = newEnd.getHours();
+      let endMinutes = newEnd.getMinutes();
+      let meridianEnd = "AM";
+      if (endMinutes === 0) {
+        endMinutes = "00";
+      }
+      if (endHour > 12) {
+        endHour -= 12;
+        meridianEnd = "PM";
+      }
+      let completeNewStart = `${startDay}/${
+        startMonth + 1
+      }/${startYear} - ${startHour}:${startMinutes}${meridianStart}`;
+      let completeNewEnd = `${endDay}/${
+        endMonth + 1
+      }/${endYear} - ${endHour}:${endMinutes}${meridianEnd}`;
+      leftTime.textContent = `Time : ${completeNewStart} - ${completeNewEnd}`;
       booking.appendChild(leftTime);
       const leftTitle = document.createElement("div");
       leftTitle.classList.add("left-title");
@@ -57,7 +89,7 @@ function checkDate(date) {
       booking.appendChild(leftDescription);
       const leftLocation = document.createElement("div");
       leftLocation.classList.add("left-location");
-      leftLocation.textContent = "Location :";
+      leftLocation.textContent = `Location : ${job.address}`;
       booking.appendChild(leftLocation);
     }
   });
@@ -202,7 +234,7 @@ const populateDisplay = (arr) => {
 
     const jobLocation = document.createElement("div");
     jobLocation.classList.add("jobLocation");
-    jobLocation.textContent = `Job Location : `;
+    jobLocation.textContent = `Job Location : ${job.address}`;
     middleDiv.appendChild(jobLocation);
 
     //create and poulate buttons div
@@ -354,6 +386,7 @@ const getAllData2 = async (id) => {
   addressDiv.classList.add("contact-address");
   addressDiv.textContent = `Address : ${data[0].address}`;
   modalContainer.appendChild(addressDiv);
+  return data[0].name;
 };
 
 // ---------------------------------------------------------------click apply
@@ -361,7 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("click", () => {
     if (event.target.classList.contains("apply")) {
       if (event.target.style.backgroundColor === "green") {
-        event.target.style.backgroundColor = "red";
+        null;
       } else {
         let jobIdNeeded = getSubstring(event.target.innerHTML, ">", "<");
         console.log("ok");
@@ -398,3 +431,77 @@ const createApplication = async (id) => {
 };
 
 // -----------------------------green dot on date of applied job
+const logInButton = document.querySelector("#post-job");
+const logInButtonTwo = document.querySelector("#post-job-two");
+const logout = (e) => {
+  if (e.target.textContent === "Log In") {
+    if (model.style.display === "none" || model.style.display === "") {
+      model.style.display = "block";
+      body.style.overflow = "hidden";
+    } else {
+      model.style.display = "none";
+      body.style.overflow = "auto";
+    }
+    if (nameType.innerHTML.includes("Business Name :")) {
+      nameType.innerHTML = nameType.innerHTML.replace(
+        "Business Name :",
+        "Name :"
+      );
+    }
+  } else {
+    e.preventDefault();
+    try {
+      window.location.assign("./index.html");
+      localStorage.clear();
+    } catch (error) {
+      throw new Error("Cannot logout");
+    }
+  }
+};
+logInButton.addEventListener("click", logout);
+logInButtonTwo.addEventListener("click", logout);
+if (!window.localStorage.token) {
+  logInButton.textContent = "Log In";
+  logInButtonTwo.textContent = "Log In";
+} else {
+  logInButton.textContent = "Log Out";
+  logInButtonTwo.textContent = "Log Out";
+}
+const dropdown = document.querySelector(".dropdown_menu");
+const icons = document.querySelectorAll(".icon");
+const icon = document.querySelector(".icon");
+const body = document.querySelector("body");
+icons.forEach((icon) => {
+  icon.addEventListener("click", (event) => {
+    icon.classList.toggle("open");
+    dropdown.classList.toggle("openDrop");
+  });
+});
+body.addEventListener("click", (e) => {
+  if (
+    e.target.classList.contains("center") ||
+    e.target.classList.contains("referenceForNav") ||
+    e.target.classList.contains("dropdown_menu")
+  ) {
+    null;
+  } else if (dropdown.classList.contains("openDrop")) {
+    dropdown.classList.remove("openDrop");
+    icon.classList.toggle("open");
+  }
+});
+
+const usernameArr = [];
+const getAllData3 = async () => {
+  let response = await fetch(
+    `http://localhost:3001/jobs/contact/${window.localStorage.token_id}`
+  );
+  const data = await response.json();
+  usernameArr.push(data);
+
+  const nameAndHours = document.querySelector(".name-hours");
+  let userName2;
+  nameAndHours.textContent = usernameArr[0][0].name
+  console.log(usernameArr)
+};
+
+getAllData3();
