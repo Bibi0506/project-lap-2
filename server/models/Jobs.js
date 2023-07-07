@@ -68,6 +68,7 @@ class Job{
     static async getUsersJobsByDate(user_id, date) {
         //input time needs to be transformed to '23:59:59.000Z+1' such that the volunteering start time doesn't affect whether they're selected, the endtime needs to be transformed to '00:00:00.000Z+1' for the same reason
         const response = await db.query("SELECT J.*, U.address FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) JOIN Users AS U ON (J.user_id = U.id) WHERE A.user_id = $1 AND J.start_datetime <= $2 AND J.enddate >= $3;", [user_id, date+' 23:59:59', date]);
+
         if (response.rows.length<1) {
             throw new Error("This user has not signed up for any volunteering positions on this date as of yet.")
         }
@@ -88,27 +89,36 @@ class Job{
 
 
     static async createJob(data) {
-        try {
-            const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = data;
-            const response = await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",
-            [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
-            );
-            const job_id = response.rows[0].job_id;
-            const newJob = await Job.getPositionByOrganisationId(user_id);
-
-            return newJob;
-        } catch(error) {
-        console.error("Error creating job:", error);
-        throw new Error("Failed to create job. Please try again later.");
+        if (Object.keys(data).length !== 8){
+            throw new Error("Data in incorrect format")
         }
+        const {user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers} = data;
+        const response = await db.query("INSERT INTO jobs (user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING job_id;",
+        [user_id, category, title, description, start_dateTime, endDate, hours_needed, num_volunteers]
+        );
+
+        if (response.rows.length!==1){
+            throw new Error("Error in creating Job")
+        }
+
+        const job_id = response.rows[0].job_id;
+        const newJob = await Job.getJobById(job_id);
+
+        return newJob;
     }
 
     static async getUserHours(user_id) {
         const response = await db.query('SELECT SUM(J.hours_needed * (J.enddate::DATE - J.start_datetime::DATE + 1)) AS "Hours Worked" FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1;', [user_id]);
-        
-        if (!response.rows[0]) {
+
+        try{
+            if (response.rows.length<1) {
+                return 0
+            }
+        } catch (err) {
             return 0
         }
+        
+    
 
         return response.rows[0]
     }

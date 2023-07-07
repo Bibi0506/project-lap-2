@@ -18,9 +18,10 @@
   "scripts": {
     "setup-db": "node ./db/setup.js",
     "dev": "nodemon -L ./index.js",
-    "test": "jest --setupFiles ./__tests__/integration/config.js --watchAll --detectOpenHandles --runInBand --verbose",
+    "test": "jest --setupFiles ./__tests__/integration/config.js --watchAll --testPathPattern=/integration/ --detectOpenHandles --runInBand --verbose",
     "start": "node ./index.js",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "unit-tests": "jest --testPathPattern=/unit/ --watchAll --verbose"
   },
   "jest": {
     "testEnvironment": "node",

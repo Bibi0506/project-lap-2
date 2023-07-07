@@ -4,6 +4,7 @@ const Job = require("../models/Jobs.js");
 async function index(req, res) {
     try {
         const jobs = await Job.getAllJobsOrderedByDateAsc();
+        console.log(jobs);
         res.status(200).send(jobs);
     } catch(err) {
         res.status(500).send({"error": err.message});
@@ -57,7 +58,6 @@ async function userJobs(req, res) {
     try {
         user_id = parseInt(req.params.user_id);
         const jobs = await Job.getUsersJobs(user_id);
-        //console.log(jobs)
         res.status(200).send(jobs);
     } catch(err) {
         res.status(404).send({"error": err.message});
@@ -83,9 +83,6 @@ async function destroy(req, res) {
         const job_id = req.params.id;
         const job = await Job.getJobById(job_id); // Retrieve a job by its ID
       
-        if (!job) {
-            throw new Error("Job not found."); // Throw an error if the job is not found
-        }
         await job.destroy(); // Call the destroy method on the job instance
         res.status(204).end(); // Send a 204 No Content response to indicate successful deletion
     } catch (err) {
