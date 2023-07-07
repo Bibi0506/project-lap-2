@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1688720365040" clover="3.2.0">
-  <project timestamp="1688720365040" name="All files">
-    <metrics statements="292" coveredstatements="175" conditionals="46" coveredconditionals="14" methods="50" coveredmethods="28" elements="388" coveredelements="217" complexity="0" loc="292" ncloc="292" packages="6" files="15" classes="15"/>
+<coverage generated="1688722894107" clover="3.2.0">
+  <project timestamp="1688722894108" name="All files">
+    <metrics statements="292" coveredstatements="181" conditionals="46" coveredconditionals="17" methods="50" coveredmethods="29" elements="388" coveredelements="227" complexity="0" loc="292" ncloc="292" packages="6" files="15" classes="15"/>
     <package name="server">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="/Users/oliverthomas/Desktop/LFA/LAP 2/Project2/project-lap-2/server/app.js">
@@ -158,17 +158,17 @@
       </file>
     </package>
     <package name="server.middleware">
-      <metrics statements="23" coveredstatements="5" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="1"/>
+      <metrics statements="23" coveredstatements="11" conditionals="8" coveredconditionals="3" methods="3" coveredmethods="2"/>
       <file name="authenticator.js" path="/Users/oliverthomas/Desktop/LFA/LAP 2/Project2/project-lap-2/server/middleware/authenticator.js">
-        <metrics statements="20" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="20" coveredstatements="8" conditionals="8" coveredconditionals="3" methods="2" coveredmethods="1"/>
         <line num="2" count="2" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="10" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="10" count="6" type="cond" truecount="3" falsecount="1"/>
         <line num="11" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>

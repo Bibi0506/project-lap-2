@@ -3,6 +3,7 @@ const express = require('express');
 const jobModel = require('../../models/Jobs');
 const jobRouter = require('../../routers/jobs');
 const jobController = require('../../controllers/jobs');
+const Token = require('../../models/token')
 
 const server = express();
 server.use(express.json());
@@ -17,6 +18,15 @@ describe('Testing jobRouter endpoints', () => {
     afterAll(() => jest.resetAllMocks());
 
     describe('GET all jobs /jobs/getall', () => {
+        beforeAll(() => {
+            jest.spyOn(Token, 'getOneByToken').mockResolvedValueOnce(true)
+            jest.mock('../../middleware/authenticator.js', ()=>{
+                
+                return {
+                    authenticatorVolunteer : jest.fn((req, res, next) => next())
+                }
+            })
+        })
         test('sends response with status code of 200', async () => {
             //This mocks data being returned from the Model
             jobModel.getAllJobsOrderedByDateAsc.mockResolvedValue([{
@@ -43,21 +53,51 @@ describe('Testing jobRouter endpoints', () => {
                 "address": "awfsa"
               }]);
             const res = await request(server).get('/jobs/getall');
+            
             expect(res.status).toBe(200);
         })
         test('response body has a length of 2', async () => {
+            jest.spyOn(Token, 'getOneByToken').mockResolvedValueOnce(true)
+            jest.mock('../../middleware/authenticator.js', ()=>{
+                
+                return {
+                    authenticatorVolunteer : jest.fn((req, res, next) => next())
+                }
+            })
             const res = await request(server).get('/jobs/getall');
+            console.log("Banana", res.body)
             expect(res.body).toHaveLength(2);
         })
         test('all objects in res.body have property "job_id"', async () => {
+            jest.spyOn(Token, 'getOneByToken').mockResolvedValueOnce(true)
+            jest.mock('../../middleware/authenticator.js', ()=>{
+                
+                return {
+                    authenticatorVolunteer : jest.fn((req, res, next) => next())
+                }
+            })
             const res = await request(server).get('/jobs/getall');
             res.body.forEach(row => expect(row).toHaveProperty("job_id"))
         })
         test('each object in res.body has 10 properties', async () => {
+            jest.spyOn(Token, 'getOneByToken').mockResolvedValueOnce(true)
+            jest.mock('../../middleware/authenticator.js', ()=>{
+                
+                return {
+                    authenticatorVolunteer : jest.fn((req, res, next) => next())
+                }
+            })
             const res = await request(server).get('/jobs/getall');
             res.body.forEach(row => expect(Object.keys(row).length).toBe(10))
         })
         test('res.body[0].job_id = 1', async () => {
+            jest.spyOn(Token, 'getOneByToken').mockResolvedValueOnce(true)
+            jest.mock('../../middleware/authenticator.js', ()=>{
+                
+                return {
+                    authenticatorVolunteer : jest.fn((req, res, next) => next())
+                }
+            })
             const res = await request(server).get('/jobs/getall');
             expect(res.body[0].job_id).toBe(1);
         })
@@ -66,6 +106,13 @@ describe('Testing jobRouter endpoints', () => {
         jest.clearAllMocks();
 
         test('sends response with status code of 500 when no data is available', async () => {
+            jest.spyOn(Token, 'getOneByToken').mockResolvedValueOnce(true)
+            jest.mock('../../middleware/authenticator.js', ()=>{
+                
+                return {
+                    authenticatorVolunteer : jest.fn((req, res, next) => next())
+                }
+            })
             //Mocks the case where no data is available
             jobModel.getAllJobsOrderedByDateAsc.mockImplementation(new Error("asdd"));
             const res = await request(server).get('/jobs/getall');
