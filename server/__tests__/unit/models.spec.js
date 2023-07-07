@@ -71,9 +71,89 @@ describe('Testing Job Model in /models/Jobs.js', () => {
     describe('Testing getJobById method', () => {
         test('Method returns an object', async () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({rows: [test_data[0]]});
-            data = await jobModel.getJobById(1);
-            console.log(data)
+            const data = await jobModel.getJobById(1);
+
             expect(data).toBeInstanceOf(jobModel);
+        })
+        test('Method throws error if db returns no data', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows:[]});
+            /*const data = await jobModel.getAllJobsOrderedByDateAsc();
+            console.log("banana", data)
+            expect(() => data).toThrow(TypeError)*/
+            await expect(jobModel.getJobById()).rejects.toThrowError();
+            
+        })
+    })
+    describe('Testing getUserJobs method', () => {
+        test('Method returns an object', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows: [test_data[0]]});
+            const data = await jobModel.getUsersJobs(1);
+
+            expect(data[0]).toBeInstanceOf(jobModel);
+        })
+        test('Method throws error if db returns no data', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows:[]});
+            /*const data = await jobModel.getAllJobsOrderedByDateAsc();
+            console.log("banana", data)
+            expect(() => data).toThrow(TypeError)*/
+            await expect(jobModel.getUsersJobs(1)).rejects.toThrowError();
+            
+        })
+    })
+    describe('Testing getUserJobsByDate method', () => {
+        test('Method returns an object', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows: [test_data[0]]});
+            const data = await jobModel.getUsersJobsByDate(1, '2023-07-01');
+
+            expect(data[0]).toBeInstanceOf(jobModel);
+        })
+        test('Method throws error if db returns no data', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows:[]});
+            /*const data = await jobModel.getAllJobsOrderedByDateAsc();
+            console.log("banana", data)
+            expect(() => data).toThrow(TypeError)*/
+            await expect(jobModel.getUsersJobsByDate(1, '2023-07-01')).rejects.toThrowError();
+            
+        })
+    })
+    describe('Testing getUserHours', () => {
+        test('Method returns an object', async ()=>{
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows: [{"Hours Worked":4}]});
+            const data = await jobModel.getUserHours(1);
+
+            
+            expect(data).toBeInstanceOf(Object);
+        })
+        test('Method returns an object with one property', async ()=>{
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows: [{"Hours Worked":4}]});
+            const data = await jobModel.getUserHours(1);
+            console.log("data", data.rows)
+            //console.log("data[0]", data[0])
+            expect(Object.keys(data)).toHaveLength(1);
+        })
+        // test('Method throws error if db returns no data', async () => {
+        //     jest.spyOn(db, 'query').mockResolvedValueOnce({rows:[]});
+        //     /*const data = await jobModel.getAllJobsOrderedByDateAsc();
+        //     console.log("banana", data)
+        //     expect(() => data).toThrow(TypeError)*/
+        //     expect(jobModel.getUserHours(1)).toBe(0);
+            
+        // })
+    })
+    describe('Testing getPositionByOrganisationId method', () => {
+        test('Method returns an object', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows: test_data});
+            const data = await jobModel.getPositionByOrganisationId(5);
+
+            expect(data[0]).toBeInstanceOf(jobModel);
+        })
+        test('Method throws error if db returns no data', async () => {
+            jest.spyOn(db, 'query').mockResolvedValueOnce({rows:[]});
+            /*const data = await jobModel.getAllJobsOrderedByDateAsc();
+            console.log("banana", data)
+            expect(() => data).toThrow(TypeError)*/
+            await expect(jobModel.getPositionByOrganisationId(5)).rejects.toThrowError();
+            
         })
     })
 })

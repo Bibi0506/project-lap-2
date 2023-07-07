@@ -19,6 +19,13 @@ body {
   align-items: center;
 }
 
+.navbar-els {
+  cursor: pointer;
+}
+.navbar-els:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 1550px) {
   .navbar {
     padding-left: 100vw;

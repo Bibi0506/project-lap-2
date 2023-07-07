@@ -109,10 +109,16 @@ class Job{
 
     static async getUserHours(user_id) {
         const response = await db.query('SELECT SUM(J.hours_needed * (J.enddate::DATE - J.start_datetime::DATE + 1)) AS "Hours Worked" FROM Applications AS A JOIN jobs as J on (J.job_id = A.job_id) WHERE A.user_id = $1;', [user_id]);
-        
-        if (!response.rows[0]) {
+
+        try{
+            if (response.rows.length<1) {
+                return 0
+            }
+        } catch (err) {
             return 0
         }
+        
+    
 
         return response.rows[0]
     }

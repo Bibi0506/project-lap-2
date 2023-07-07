@@ -132,6 +132,7 @@ whiteButton.addEventListener("click", function () {
 });
 
 const logInButton = document.querySelector("#post-job");
+const logInButtonTwo = document.querySelector("#post-job-two");
 
 const logout = (e) => {
   if (e.target.textContent === "Log In") {
@@ -151,7 +152,7 @@ const logout = (e) => {
   } else {
     e.preventDefault();
     try {
-      window.location.assign("homepage.html");
+      window.location.assign("./index.html");
       localStorage.clear();
     } catch (error) {
       throw new Error("Cannot logout");
@@ -160,9 +161,12 @@ const logout = (e) => {
 };
 
 logInButton.addEventListener("click", logout);
+logInButtonTwo.addEventListener("click", logout);
 
 if (!window.localStorage.token) {
   logInButton.textContent = "Log In";
+  logInButtonTwo.textContent = "Log In";
 } else {
   logInButton.textContent = "Log Out";
+  logInButtonTwo.textContent = "Log Out";
 }
