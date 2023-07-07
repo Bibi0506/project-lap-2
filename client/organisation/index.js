@@ -38,12 +38,12 @@ async function postCreated(e) {
     console.error("Error adding data to the database.");
   }
   window.location.assign("./index.html");
-  console.log(data);
 }
 
 function changeDate(inputDate) {
   //Split date into 3 parts
   const parts = inputDate.split("/");
+  console.log(parts);
   //Rearrange new date object
   const dateObj = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
   //Get each bit for the date eg. year, month, day
@@ -58,7 +58,6 @@ async function fetchJobPost() {
   const response = await fetch(
     `http://localhost:3001/jobs/organisations/${window.localStorage.token_id}`
   );
-  console.log(response);
   if (response.status == 404) {
     console.log("Ok");
   } else {
@@ -69,7 +68,7 @@ async function fetchJobPost() {
 
 async function checkAuth() {
   let metadata = window.localStorage;
-  console.log(metadata);
+
   const options = {
     headers: {
       authorisation: metadata.token,
@@ -96,12 +95,51 @@ function addJob(jobList) {
     const {
       title,
       description,
-      start_datetime,
-      enddate,
+      start_dateTime,
+      endDate,
       hours_needed,
       num_volunteers,
       address,
     } = job;
+
+    const newStart = new Date(start_dateTime);
+    const newEnd = new Date(endDate);
+
+    let startDay = newStart.getDate();
+    let startMonth = newStart.getMonth();
+    let startYear = newStart.getFullYear();
+    let startHour = newStart.getHours();
+    let startMinutes = newStart.getMinutes();
+    let meridianStart = "AM";
+    if (startMinutes === 0) {
+      startMinutes = "00";
+    }
+    if (startHour > 12) {
+      startHour -= 12;
+      meridianStart = "PM";
+    }
+
+    let endDay = newEnd.getDate();
+    let endMonth = newEnd.getMonth();
+    let endYear = newEnd.getFullYear();
+    let endHour = newEnd.getHours();
+    let endMinutes = newEnd.getMinutes();
+    let meridianEnd = "AM";
+    if (endMinutes === 0) {
+      endMinutes = "00";
+    }
+    if (endHour > 12) {
+      endHour -= 12;
+      meridianEnd = "PM";
+    }
+
+    let completeNewStart = `${startDay}/${
+      startMonth + 1
+    }/${startYear} - ${startHour}:${startMinutes}${meridianStart}`;
+    let completeNewEnd = `${endDay}/${
+      endMonth + 1
+    }/${endYear} - ${endHour}:${endMinutes}${meridianEnd}`;
+
     const jobTitle = document.createElement("div");
     jobTitle.classList.add("left");
     jobTitle.innerHTML = `<div class="jobs">
@@ -110,7 +148,7 @@ function addJob(jobList) {
               <div class="description">Job Description : ${description}</div>
           </div>
           <div class="middle">
-              <div class="dates">Dates : ${start_datetime} - ${enddate}</div>
+              <div class="dates">Dates : ${completeNewStart} to ${completeNewEnd}</div>
               <div class="hours">Hours / day : ${hours_needed}</div>
               <div class="location">Location : ${address} </div>
           </div>
