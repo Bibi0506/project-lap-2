@@ -19,6 +19,13 @@ body {
   align-items: center;
 }
 
+.navbar-els {
+  cursor: pointer;
+}
+.navbar-els:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 1550px) {
   .navbar {
     padding-left: 100vw;
@@ -82,6 +89,8 @@ body {
   align-items: center;
   text-align: center;
   width: 65%;
+  
+  
 }
 
 #homepage-right {
@@ -198,6 +207,7 @@ body {
   text-align: center;
   align-items: center;
   justify-content: space-evenly;
+
 }
 
 .homepage-buttons {

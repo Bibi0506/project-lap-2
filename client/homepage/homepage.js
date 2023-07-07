@@ -1,3 +1,11 @@
+const password = document.querySelector("#password-register");
+const email = document.querySelector("#email-register");
+const name = document.querySelector("#name-register");
+const phone = document.querySelector("#phone-register");
+const address = document.querySelector("#address-register");
+const name_type = document.querySelector("#name_type");
+const passwordLog = document.querySelector("#password-login");
+const username = document.querySelector("#email-login");
 const snippet = document.querySelector(".homepage-snippet h3");
 const snippetName = document.querySelector(".homepage-snippet h1");
 
@@ -77,6 +85,15 @@ modalClose.addEventListener("click", function () {
   if (model.style.display == "block") {
     model.style.display = "none";
     body.style.overflow = "auto";
+    password.value =
+      email.value =
+      name.value =
+      phone.value =
+      address.value =
+      name_type.value =
+      passwordLog.value =
+      username.value =
+        "";
   }
 });
 
@@ -113,3 +130,43 @@ whiteButton.addEventListener("click", function () {
     }
   }
 });
+
+const logInButton = document.querySelector("#post-job");
+const logInButtonTwo = document.querySelector("#post-job-two");
+
+const logout = (e) => {
+  if (e.target.textContent === "Log In") {
+    if (model.style.display === "none" || model.style.display === "") {
+      model.style.display = "block";
+      body.style.overflow = "hidden";
+    } else {
+      model.style.display = "none";
+      body.style.overflow = "auto";
+    }
+    if (nameType.innerHTML.includes("Business Name :")) {
+      nameType.innerHTML = nameType.innerHTML.replace(
+        "Business Name :",
+        "Name :"
+      );
+    }
+  } else {
+    e.preventDefault();
+    try {
+      window.location.assign("./index.html");
+      localStorage.clear();
+    } catch (error) {
+      throw new Error("Cannot logout");
+    }
+  }
+};
+
+logInButton.addEventListener("click", logout);
+logInButtonTwo.addEventListener("click", logout);
+
+if (!window.localStorage.token) {
+  logInButton.textContent = "Log In";
+  logInButtonTwo.textContent = "Log In";
+} else {
+  logInButton.textContent = "Log Out";
+  logInButtonTwo.textContent = "Log Out";
+}

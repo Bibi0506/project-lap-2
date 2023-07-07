@@ -1,11 +1,14 @@
-const {Router} = require("express");
-
+const { Router } = require("express");
 const jobController = require("../controllers/jobs");
+const {
+  authenticatorVolunteer,
+  authenticatorOrganisation,
+} = require("../middleware/authenticator");
 
 const jobRouter = Router();
 
 //GET route to return all job listings
-jobRouter.get("/getall", jobController.index);
+jobRouter.get("/getall", authenticatorVolunteer, jobController.index);
 
 //GET route to return all job listings associated to the user on a specific date
 jobRouter.get("/user/:user_id/:date", jobController.userJobsDate);
@@ -16,6 +19,9 @@ jobRouter.get("/user/:user_id", jobController.userJobs);
 //GET route to return sum of hours worked by user
 jobRouter.get("/hours/user/:user_id", jobController.getHours);
 
+//GET route to return an organisations contact details
+jobRouter.get("/contact/:id", jobController.getOrgContactDetails);
+
 //GET route to get all position by organization_id
 jobRouter.get("/organisations/:id", jobController.show);
 
@@ -25,11 +31,6 @@ jobRouter.get("/jobs/:id", jobController.showJobsById);
 jobRouter.post("/", jobController.create);
 //DELETE route to delete job posts
 jobRouter.delete("/:id", jobController.destroy);
-
-//Handles regitration and login
-//jobRouter.post("/register", userController.register);
-//jobRouter.post("/login", userController.login);
-
 //Get all job by category(id?)
 
 jobRouter.get("/:id", jobController.show);

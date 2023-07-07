@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unity</title>
+    <script defer src="./homepage/homepage.js"></script>
+    <script defer src="./homepage/homepageRequests.js"></script>
+    <script
+      src="https://kit.fontawesome.com/e0f29e24ce.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./homepage/homepage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1><a href="./homepage.html">Unity</a></h1>
+        <p class="sublogo">Post.Volunteer.Connect</p>
+      </div>
+      <div class="nav-buttons">
+        <h1 class="nav-button" id="about-unity">About Unity</h1>
+        <h1 class="nav-button" id="post-job">Log in</h1>
+      </div>
+      <div class="icon center" alt="options symbol">
+        <span class="referenceForNav"></span>
+        <span class="referenceForNav"></span>
+        <span class="referenceForNav"></span>
+      </div>
+    </div>
+    <div class="dropdown_menu" id="dropdown-menu">
+      <a class="navbar-els">About Unity</a>
+
+      <a class="navbar-els" id="post-job-two">Log in</a>
+    </div>
+    <div id="homepage-container">
+      <div id="homepage-left">
+        <h1 class="homepage-title bold-text">
+          The most skilled and trusted volunteers
+        </h1>
+        <h3 class="homepage-text">
+          Get instant access to a curated pool of dedicated volunteers, seeking
+          to serve the council. Find individuals passionate about community
+          service, willing to contribute their skills and expertise in various
+          areas. Discover volunteers in roles such as Gardeners, Librarians,
+          Shoppers and more...
+        </h3>
+        <div class="homepage-buttons">
+          <button id="white-button">
+            <p class="bold-text">Looking for a volunteer?</p>
+            <p>Login/Register</p>
+          </button>
+          <button id="blue-button">
+            <p class="bold-text">You want to volunteer?</p>
+            <p>Login/Register</p>
+          </button>
+        </div>
+        <div class="homepage-snippet">
+          <h3 class="bold-text fade-in-text">
+            "Volunteering as a gardener for the council through Unity was an
+            incredibly rewarding experience. I was able to contribute my passion
+            for gardening while making a positive impact in the community, and
+            the platform made it effortless to connect with the council and find
+            this volunteering opportunity."
+          </h3>
+          <h1 class="fade-in-text">-Big Dave</h1>
+        </div>
+      </div>
+      <div id="homepage-right">
+        <div id="info-container">
+          <h2 class="underline">Information</h2>
+          <h2>What can be recycled?</h2>
+          <h2>Bin collection times</h2>
+          <h2>Composting programmes</h2>
+          <h2>Bus times</h2>
+          <h2>Paid jobs</h2>
+        </div>
+      </div>
+    </div>
+    <div class="modal-container">
+      <div class="user-login-model">
+        <div class="modal-centering-container">
+          <i class="fa-solid fa-x" id="modal-close"></i>
+          <h3>Log In</h3>
+          <div class="email input-container">
+            <p class="model-label">E-mail :</p>
+            <input
+              type="email"
+              id="email-login"
+              class="login-input"
+              placeholder="Email Address"
+            /><br />
+          </div>
+
+          <div class="password input-container">
+            <p class="model-label">Password :</p>
+            <input
+              type="password"
+              id="password-login"
+              class="login-input"
+              placeholder="Password"
+            />
+          </div>
+
+          <button type="submit" id="login-submit" class="login-button">
+            Log In
+          </button>
+
+          <h3 id="register-text">Register</h3>
+          <div class="email input-container">
+            <p class="model-label">E-mail :</p>
+            <input
+              type="email"
+              class="login-input"
+              id="email-register"
+              placeholder="Email Address"
+            />
+          </div>
+
+          <div class="password input-container">
+            <p class="model-label">Password :</p>
+            <input
+              type="password"
+              title="you must have at least 8 characters, including one uppercase, one lowercase, one special character and a number"
+              id="password-register"
+              class="login-input"
+              placeholder="Password"
+            />
+          </div>
+          <div class="name input-container">
+            <p class="model-label" id="name_type">Name :</p>
+            <input
+              type="name"
+              id="name-register"
+              class="login-input"
+              placeholder="Name"
+            />
+          </div>
+          <div class="phone-number input-container">
+            <p class="model-label">Phone:</p>
+            <input
+              id="phone-register"
+              class="login-input"
+              placeholder="Phone Number"
+            />
+          </div>
+          <div class="address input-container">
+            <p class="model-label">Address :</p>
+            <input
+              id="address-register"
+              class="login-input"
+              placeholder="Address"
+            />
+          </div>
+          <button id="register-submit" class="login-button">Register</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
