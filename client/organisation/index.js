@@ -24,7 +24,10 @@ async function postCreated(e) {
     },
     body: JSON.stringify(data),
   };
-  const response = await fetch("http://localhost:3001/jobs", options);
+  const response = await fetch(
+    "https://dotmocracy-council-website.onrender.com/jobs",
+    options
+  );
   if (response.status === 201) {
     document.querySelector("#jobCategory").value = "";
     document.querySelector("#jobTitle").value = "";
@@ -56,7 +59,7 @@ function changeDate(inputDate) {
 
 async function fetchJobPost() {
   const response = await fetch(
-    `http://localhost:3001/jobs/organisations/${window.localStorage.token_id}`
+    `https://dotmocracy-council-website.onrender.com/jobs/organisations/${window.localStorage.token_id}`
   );
   if (response.status == 404) {
     console.log("Ok");
@@ -76,7 +79,7 @@ async function checkAuth() {
     },
   };
   const response = await fetch(
-    `http://localhost:3001/applications/id/0`,
+    `https://dotmocracy-council-website.onrender.com/applications/id/0`,
     options
   );
   console.log(response.status);

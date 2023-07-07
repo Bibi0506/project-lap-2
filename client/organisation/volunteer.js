@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const allJobsAssociatedToUser = [];
 const getAllJobs = async () => {
   let response = await fetch(
-    `http://localhost:3001/jobs/user/${window.localStorage.token_id}`
+    `https://dotmocracy-council-website.onrender.com/jobs/user/${window.localStorage.token_id}`
   );
   const data = await response.json();
 
@@ -177,7 +177,10 @@ const respData = async () => {
     },
   };
 
-  let response = await fetch(`http://localhost:3001/jobs/getall`, options);
+  let response = await fetch(
+    `https://dotmocracy-council-website.onrender.com/jobs/getall`,
+    options
+  );
 
   if (response.status === 403) {
     window.location.assign("../index.html");
@@ -265,7 +268,9 @@ const populateDisplay = (arr) => {
 const applicationsData = [];
 
 async function getAllApplications() {
-  const response = await fetch(`http://localhost:3001/applications/index`);
+  const response = await fetch(
+    `https://dotmocracy-council-website.onrender.com/applications/index`
+  );
   const data = await response.json();
   applicationsData.push(data);
 }
@@ -291,7 +296,7 @@ function checkApplication(id) {
 const alldatasAssociatedToUser = [];
 const getAllData = async () => {
   let response = await fetch(
-    `http://localhost:3001/jobs/user/${window.localStorage.token_id}`
+    `https://dotmocracy-council-website.onrender.com/jobs/user/${window.localStorage.token_id}`
   );
   const data = await response.json();
   alldatasAssociatedToUser.push(data);
@@ -359,7 +364,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const alldatasAssociatedToUser2 = [];
 const getAllData2 = async (id) => {
-  let response = await fetch(`http://localhost:3001/jobs/contact/${id}`);
+  let response = await fetch(
+    `https://dotmocracy-council-website.onrender.com/jobs/contact/${id}`
+  );
   const data = await response.json();
   alldatasAssociatedToUser2.push(data);
 
@@ -423,7 +430,7 @@ const createApplication = async (id) => {
   };
 
   let response = await fetch(
-    "http://localhost:3001/applications/create",
+    "https://dotmocracy-council-website.onrender.com/applications/create",
     options
   );
   const data = await response.json();
@@ -493,15 +500,15 @@ body.addEventListener("click", (e) => {
 const usernameArr = [];
 const getAllData3 = async () => {
   let response = await fetch(
-    `http://localhost:3001/jobs/contact/${window.localStorage.token_id}`
+    `https://dotmocracy-council-website.onrender.com/jobs/contact/${window.localStorage.token_id}`
   );
   const data = await response.json();
   usernameArr.push(data);
 
   const nameAndHours = document.querySelector(".name-hours");
   let userName2;
-  nameAndHours.textContent = usernameArr[0][0].name
-  console.log(usernameArr)
+  nameAndHours.textContent = usernameArr[0][0].name;
+  console.log(usernameArr);
 };
 
 getAllData3();

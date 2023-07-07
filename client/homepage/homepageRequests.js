@@ -14,7 +14,10 @@ document.querySelector("#login-submit").addEventListener("click", async () => {
     }),
   };
 
-  const response = await fetch("http://localhost:3001/users/login", options);
+  const response = await fetch(
+    "https://dotmocracy-council-website.onrender.com/users/login",
+    options
+  );
   const data = await response.json();
 
   if (response.status == 200) {
@@ -81,7 +84,7 @@ document
       };
 
       const response = await fetch(
-        "http://localhost:3001/users/register",
+        "https://dotmocracy-council-website.onrender.com/users/register",
         options
       );
       const data = await response.json();
