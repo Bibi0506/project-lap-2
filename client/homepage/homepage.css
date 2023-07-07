@@ -89,6 +89,8 @@ body {
   align-items: center;
   text-align: center;
   width: 65%;
+  
+  
 }
 
 #homepage-right {
@@ -205,6 +207,7 @@ body {
   text-align: center;
   align-items: center;
   justify-content: space-evenly;
+
 }
 
 .homepage-buttons {
