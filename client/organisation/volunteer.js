@@ -186,6 +186,7 @@ const populateDisplay = (arr) => {
     jobLocation.classList.add("jobLocation");
     jobLocation.textContent = `Job Location : ${job.address} `;
     middleDiv.appendChild(jobLocation);
+   
 
     //create and poulate buttons div
 
@@ -194,7 +195,29 @@ const populateDisplay = (arr) => {
     jobsDiv.appendChild(buttonsDiv);
 
     const apply = document.createElement("div");
+    apply.addEventListener("click",async (b)=>{
+      // const userId = localStorage.getItem("user_id")
+      const job_id = b.className[1]
+      console.log("Apply button clicked!");
+      console.log(job_id);
+      // -----------------------------send post request
+ 
+ 
+    const options= {method: "POST",
+    headers: {
+    "Content-Type": "application/json","Accept":"application/json"},
+    body:JSON.stringify({"user_id":user_id,"job_id":job_id})
+     }
+    const result = await fetch("http://localhost:3001/applications/create",options)
+ if(result.status === 201){
+  alert("successful sign up")
+ }
+    })
+// -----------------------------green dot on date of applied job
+  
+   
     apply.classList.add("apply");
+    apply.classList.add(job.job_id)
     apply.textContent = "Apply Online";
     buttonsDiv.appendChild(apply);
 
@@ -309,40 +332,4 @@ const getAllData = async (id) => {
 };
 getAllJobs();
 
-//----------- get user id - should this be the auth key ?
-const getLoggedInUser = [];
-const getUserData = async (id) => {
-  let response = await fetch(`http://localhost:3001/jobs/user/2`);
-  const data = await response.json();
-  getLoggedInUser.push(data);
-  console.log(getLoggedInUser);
-};
-console.log(getUserData(getLoggedInUser));
-// ---------------------------------------------------------------click apply
-window.addEventListener("DOMContentLoaded", function () {
-  const jobID = (window.onclick = function (event) {
-    if (event.target.classList.contains("apply")) {
-      console.log("Apply button clicked!");
-    }
-  });
-});
 
-// -----------------------------send post request
-
-fetch("http://localhost:3001/applications/index", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/index",
-  },
-  body: JSON.stringify(applicationData),
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Application submitted:", data);
-  })
-  .catch((error) => {
-    console.error("Error submitting application:", error);
-  });
-
-// -----------------------------green dot on date of applied job
-  
